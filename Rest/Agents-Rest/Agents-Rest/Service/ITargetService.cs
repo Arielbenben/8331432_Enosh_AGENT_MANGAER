@@ -6,8 +6,11 @@ namespace Agents_Rest.Service
     public interface ITargetService
     {
         Task<TargetModel> GetTargetByIdAsync(int id);
+        Task<List<TargetModel>> GetAllTargetsAsync();
         Task<TargetIdDto> CreateTarget(TargetDto targetDto);
         Task UpdateTargetByIdAsync(int id, TargetDto targetDto);
         Task DeleteTargetByIdAsync(int id);
+        Task SetLocation(int id, SetLocationDto setLocationAgentDto);
+        Task MoveLocation(int id, MoveLocationDto moveLocationDto);
     }
 }

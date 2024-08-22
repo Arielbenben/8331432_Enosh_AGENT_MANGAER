@@ -30,7 +30,7 @@ namespace Agents_Rest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Image")
+                    b.Property<string>("Image_url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -91,6 +91,10 @@ namespace Agents_Rest.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Image_url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Location_x")
                         .HasColumnType("int");

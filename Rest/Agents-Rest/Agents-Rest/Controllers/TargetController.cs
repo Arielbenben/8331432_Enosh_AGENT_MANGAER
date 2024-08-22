@@ -15,6 +15,22 @@ namespace Agents_Rest.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<TargetModel>> GetAllTargets()
+        {
+            try
+            {
+                return Ok(await targetService.GetAllTargetsAsync());
+            }
+            catch
+            {
+                return BadRequest("Get request was wrong");
+            }
+        }
+
+
+        [HttpGet("get/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<TargetModel>> GetTargetById(int id)
         {
             try
@@ -76,6 +92,40 @@ namespace Agents_Rest.Controllers
             catch
             {
                 return BadRequest("The update request was wrong");
+            }
+        }
+
+
+        [HttpPut("{id}/pin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> SetLocationTarget(int id, [FromBody] SetLocationDto setLocationDto)
+        {
+            try
+            {
+                await targetService.SetLocation(id, setLocationDto);
+                return Ok("updated location");
+            }
+            catch
+            {
+                return BadRequest("update location was wrong");
+            }
+        }
+
+
+        [HttpPut("{id}/move")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> UpdateTargetLocation(int id, [FromBody] MoveLocationDto moveLocationDto)
+        {
+            try
+            {
+                await targetService.MoveLocation(id, moveLocationDto);
+                return Ok("Location updated");
+            }
+            catch
+            {
+                return BadRequest("move location was wrong");
             }
         }
     }

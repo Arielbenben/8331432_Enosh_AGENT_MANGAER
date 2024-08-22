@@ -18,7 +18,7 @@ namespace Agents_Rest.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NickName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image_url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location_x = table.Column<int>(type: "int", nullable: false),
                     Location_y = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
@@ -38,6 +38,7 @@ namespace Agents_Rest.Migrations
                     Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location_x = table.Column<int>(type: "int", nullable: false),
                     Location_y = table.Column<int>(type: "int", nullable: false),
+                    Image_url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StatusTarget = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

@@ -1,6 +1,6 @@
 ﻿namespace Agents_Rest.Dto
 {
-    public class SetLocationAgentDto
+    public class SetLocationDto
     {
         public int X {  get; set; }
         public int Y {  get; set; }

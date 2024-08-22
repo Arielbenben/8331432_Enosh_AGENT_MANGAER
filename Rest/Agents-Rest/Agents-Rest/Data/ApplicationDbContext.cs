@@ -22,6 +22,7 @@ namespace Agents_Rest.Data
                 .WithMany()
                 .HasForeignKey(mission => mission.AgentId)
                 .OnDelete(DeleteBehavior.Restrict);
+                
 
             modelBuilder.Entity<MissionModel>()
                 .HasOne(mission => mission.Target)

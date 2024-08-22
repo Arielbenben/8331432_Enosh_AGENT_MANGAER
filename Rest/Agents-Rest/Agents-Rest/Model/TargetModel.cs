@@ -13,6 +13,7 @@
         public string Position { get; set; }
         public int Location_x { get; set; } = 0;
         public int Location_y { get; set; } = 0;
+        public string Image_url { get; set; }
         public StatusTarget StatusTarget { get; set; } = StatusTarget.Living;
 
     }

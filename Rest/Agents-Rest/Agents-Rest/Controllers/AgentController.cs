@@ -14,11 +14,27 @@ namespace Agents_Rest.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<AgentModel>> GetAllAgents()
+        {
+            try
+            {
+                return Ok(await agentService.GetAllAgentsAsync());
+            }
+            catch
+            {
+                return BadRequest("Get request was wrong");
+            }
+        }
+
+
+        [HttpGet("get/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<AgentModel>> GetByNickName(int id)
         {
             try
             {
-                return Ok(await agentService.GetAgentByNickName(id));
+                return Ok(await agentService.GetAgentById(id));
             }
             catch
             {
@@ -81,11 +97,11 @@ namespace Agents_Rest.Controllers
         [HttpPut("{id}/pin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> SetLocationAgent(int id, [FromBody] SetLocationAgentDto setLocationAgentDto)
+        public async Task<ActionResult> SetLocationAgent(int id, [FromBody] SetLocationDto setLocationDto)
         {
             try
             {
-                await agentService.SetLocation(id, setLocationAgentDto);
+                await agentService.SetLocation(id, setLocationDto);
                 return Ok("updated location");
             }
             catch
@@ -100,7 +116,15 @@ namespace Agents_Rest.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> UpdateAgentLocation(int id, [FromBody] MoveLocationDto moveLocationDto)
         {
-
+            try
+            {
+                await agentService.MoveLocation(id, moveLocationDto);
+                return Ok("Location updated");
+            }
+            catch
+            {
+                return BadRequest("move location was wrong");
+            }
         }
     }
 }
