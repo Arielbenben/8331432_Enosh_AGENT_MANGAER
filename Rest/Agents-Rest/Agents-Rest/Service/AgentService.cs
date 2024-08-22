@@ -1,12 +1,14 @@
 ﻿using Agents_Rest.Data;
 using Agents_Rest.Model;
 using Agents_Rest.Dto;
+using static Agents_Rest.Utills.CalculateDistanceUtill;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agents_Rest.Service
 {
-    public class AgentService(ApplicationDbContext context) : IAgentService
+    public class AgentService(ApplicationDbContext context,
+        IMissionService missionService, ITargetService targetService) : IAgentService
     {
 
         private readonly Dictionary<string, (int x, int y)> directions = new()
@@ -43,7 +45,7 @@ namespace Agents_Rest.Service
             AgentModel newAgent = new()
             {
                 NickName = agentDto.NickName,
-                Image_url = agentDto.Photo_url,
+                Image_url = agentDto.PhotoUrl,
             };
 
             await context.Agents.AddAsync(newAgent);
@@ -68,7 +70,7 @@ namespace Agents_Rest.Service
             var agent = await GetAgentById(id);
 
             agent.NickName = agentDto.NickName;
-            agent.Image_url = agentDto.Photo_url;
+            agent.Image_url = agentDto.PhotoUrl;
 
             await context.SaveChangesAsync();
             return;
@@ -106,6 +108,62 @@ namespace Agents_Rest.Service
         {
             return agent.Location_x + location.x >= 0 && agent.Location_x + location.x <= 1000
                 && agent.Location_y + location.y >= 0 && agent.Location_y + location.y <= 1000;
+        }
+
+        public async Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target) // neet to check
+        {
+            if(agent.Location_x != target.Location_x && agent.Location_y != target.Location_y)
+            {
+                if (agent.Location_x < target.Location_x)
+                    agent.Location_x += 1;
+                if (agent.Location_x > target.Location_x)
+                    agent.Location_x -= 1;
+                if (agent.Location_y < target.Location_y)
+                    agent.Location_y += 1;
+                if (agent.Location_y > target.Location_y)
+                    agent.Location_y -= 1;
+                else throw new Exception("The location is inValid");
+
+                await context.SaveChangesAsync();
+                return;
+            }
+            else
+            {
+                if(agent.Location_x != target.Location_x)
+                {
+                    if(agent.Location_x > target.Location_x)
+                        agent.Location_x -= 1;
+                    else
+                        agent.Location_x += 1;
+
+                    if (agent.Location_y < target.Location_y)
+                        agent.Location_y -= 1;
+                    else
+                        agent.Location_y += 1;
+                }
+
+                await context.SaveChangesAsync();
+                return;
+            }
+        }
+
+        public async Task<List<MissionModel>> CheckPosibilityMissionToAgent(AgentModel agent)
+        {
+            var potentialTargets = await context.Targets.Where(t => t.StatusTarget == StatusTarget.Living)
+                .Where(x => CalculateDistance(agent, x) <= 200).ToListAsync();
+
+            foreach (var target in potentialTargets) {
+                if (!await targetService.TargetIsvalid(target))
+                {
+                    potentialTargets.Remove(target);
+                }
+            }
+            potentialTargets.Select(async p => await missionService.CreateMission(agent, p));
+
+            var potencialMission = await context.Missions.Where(m => m.Agent == agent)
+                .Where(m => m.Status == StatusMission.Offer).ToListAsync();
+
+            return potencialMission;
         }
     }
 }

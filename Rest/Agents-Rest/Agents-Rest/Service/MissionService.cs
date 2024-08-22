@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Agents_Rest.Service
 {
-    public class MissionService(ApplicationDbContext context) : IMissionService
+    public class MissionService(ApplicationDbContext context, IAgentService agentService) : IMissionService
     {
         public async Task<List<MissionModel>> GetAllMissionsAsync()
         {
@@ -38,8 +38,20 @@ namespace Agents_Rest.Service
             return distance / 5;
         }
 
+        public async Task UpdateMissionAgentLocation(MissionModel mission)
+        {
+            await agentService.UpdateAgentLocationKillMission(mission.Agent, mission.Target);
+            return;
+        }
 
+        public async Task UpdateMissionAssigned(MissionModel mission, AgentModel agent)
+        {
+            mission.Status = StatusMission.Assigned;
+            mission.Agent = agent;
 
+            await context.SaveChangesAsync();
+            return;
+        }
     }
 
     

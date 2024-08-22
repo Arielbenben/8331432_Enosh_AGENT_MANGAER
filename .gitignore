@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.vsidx
+/Rest/Agents-Rest/.vs/Agents-Rest/DesignTimeBuild/.dtbcache.v2
+/Rest/Agents-Rest/.vs/Agents-Rest/v17/.suo
+/Rest/Agents-Rest/Agents-Rest/bin/Debug/net8.0/Agents-Rest.dll
+/Rest/Agents-Rest/Agents-Rest/bin/Debug/net8.0/Agents-Rest.exe
+/Rest/Agents-Rest/Agents-Rest/bin/Debug/net8.0/Agents-Rest.pdb

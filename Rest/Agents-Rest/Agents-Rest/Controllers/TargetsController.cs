@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Agents_Rest.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class TargetController(ApplicationDbContext context, ITargetService targetService) : ControllerBase
+    public class TargetsController(ApplicationDbContext context, ITargetService targetService) : ControllerBase
     {
 
         [HttpGet]

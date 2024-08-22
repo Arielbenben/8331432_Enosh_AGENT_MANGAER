@@ -13,5 +13,6 @@ namespace Agents_Rest.Service
         Task SetLocation(int id, SetLocationDto setLocationAgentDto);
         Task MoveLocation(int id, MoveLocationDto moveLocationDto);
         bool CheckLocationInRange(AgentModel agent, (int x, int y) location);
+        Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target);
     }
 }

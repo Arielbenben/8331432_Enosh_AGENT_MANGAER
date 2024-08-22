@@ -3,7 +3,7 @@
     public enum StatusMission
     {
         Offer,
-        ConnectToMission,
+        Assigned,
         Done
     }
     public class MissionModel
@@ -13,7 +13,7 @@
         public AgentModel Agent { get; set; }
         public int TargetId { get; set; }
         public TargetModel Target { get; set; }
-        public DateTime TimeLeft { get; set; }
+        public double TimeLeft { get; set; }
         public DateTime ExecutionTime { get; set; }
         public StatusMission Status { get; set; } = StatusMission.Offer;
 

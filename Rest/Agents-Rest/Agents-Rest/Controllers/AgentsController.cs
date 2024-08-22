@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Agents_Rest.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class AgentController(IAgentService agentService) : ControllerBase
+    public class AgentsController(IAgentService agentService) : ControllerBase
     {
 
         [HttpGet]

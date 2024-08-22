@@ -1,11 +1,12 @@
 ﻿using Agents_Rest.Data;
 using Agents_Rest.Dto;
 using Agents_Rest.Model;
+using static Agents_Rest.Utills.CalculateDistanceUtill;
 using Microsoft.EntityFrameworkCore;
 
 namespace Agents_Rest.Service
 {
-    public class TargetService(ApplicationDbContext context) : ITargetService
+    public class TargetService(ApplicationDbContext context, IMissionService missionService) : ITargetService
     {
 
         private readonly Dictionary<string, (int x, int y)> directions = new()
@@ -26,7 +27,7 @@ namespace Agents_Rest.Service
             {
                 Name = targetDto.Name,
                 Position = targetDto.Position,
-                Image_url = targetDto.Photo_url
+                Image_url = targetDto.PhotoUrl
             };
 
             await context.Targets.AddAsync(newTarget);
@@ -69,7 +70,7 @@ namespace Agents_Rest.Service
 
             target.Name = targetDto.Name;
             target.Position = targetDto.Position;
-            target.Image_url = targetDto.Photo_url;
+            target.Image_url = targetDto.PhotoUrl;
 
             await context.SaveChangesAsync();
             return;
@@ -107,6 +108,25 @@ namespace Agents_Rest.Service
         {
             return target.Location_x + location.x >= 0 && target.Location_x + location.x <= 1000
                 && target.Location_y + location.y >= 0 && target.Location_y + location.y <= 1000;
+        }
+
+        public async Task<bool> TargetIsvalid(TargetModel target) // check
+        {
+            return !await context.Missions.Where(m => m.Target == target)
+                .AnyAsync(m => m.Status == StatusMission.Assigned);
+        }
+
+        public async Task<List<MissionModel>> CheckPosibilityMissionToTarget(TargetModel target)
+        {
+            var potentialAgents = await context.Agents.Where(a => a.Status == StatusAgent.Dormant)
+                .Where(a => CalculateDistance(a, target) <= 200).ToListAsync();
+
+            potentialAgents.Select(async p => await missionService.CreateMission(p, target));
+
+            var potencialMission = await context.Missions.Where(m => m.Target == target)
+                .Where(m => m.Status == StatusMission.Offer).ToListAsync();
+
+            return potencialMission;
         }
 
     }
