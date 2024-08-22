@@ -33,7 +33,25 @@ namespace Agents_Rest.Controllers
         {
             try
             {
-                await missionService.UpdateMissionAssigned(mission, agent);
+                await missionService.UpdateMissionAssigned(mission);
+                return Ok("Updated");
+            }
+            catch
+            {
+                return BadRequest("Put request was wrong");
+            }
+        }
+
+        [HttpPost("update")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> UpdateAgentToKillAndTimeLeft()
+        {
+            try
+            {
+                await missionService.UpdateMissiomMoveAgentsActive();
+                await missionService.UpdateAllMissionsTimeLeft();
+
                 return Ok("Updated");
             }
             catch

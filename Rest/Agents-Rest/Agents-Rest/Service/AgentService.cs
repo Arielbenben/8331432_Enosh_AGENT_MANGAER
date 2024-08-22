@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Agents_Rest.Service
 {
-    public class AgentService(ApplicationDbContext context,
-        IMissionService missionService, ITargetService targetService) : IAgentService
+    public class AgentService(ApplicationDbContext context, IServiceProvider serviceProvider) : IAgentService
     {
+        private IMissionService missionService = serviceProvider.GetRequiredService<IMissionService>();
+        private ITargetService targetService = serviceProvider.GetRequiredService<ITargetService>();
 
         private readonly Dictionary<string, (int x, int y)> directions = new()
         {
@@ -50,6 +51,8 @@ namespace Agents_Rest.Service
 
             await context.Agents.AddAsync(newAgent);
             await context.SaveChangesAsync();
+
+            await CheckPosibilityMissionToAgent(newAgent); // need to check where it go
 
             AgentIdDto agentIdDto = new() { Id = newAgent.Id };
 
@@ -92,6 +95,10 @@ namespace Agents_Rest.Service
             var (x, y) = directions[moveLocationDto.Location];
 
             var agent = await GetAgentById(id);
+            // check if agent is valid
+            if (agent.Status == StatusAgent.Active) throw new Exception(
+                "The agent is active, It is not possible to change location"); 
+
 
             if (CheckLocationInRange(agent, (x, y)))
             {
@@ -100,7 +107,8 @@ namespace Agents_Rest.Service
             }
             else
             {
-                throw new Exception("The location is out of range");
+                throw new Exception($"The location is out of range," +
+                    $" current location: {(agent.Location_x, agent.Location_y)}");
             }
         }
 
@@ -164,6 +172,27 @@ namespace Agents_Rest.Service
                 .Where(m => m.Status == StatusMission.Offer).ToListAsync();
 
             return potencialMission;
+        }
+
+        public async Task<Dictionary<AgentModel, List<MissionModel>>> RefreshAllAgentsPosibilityMissions()
+        {
+            Dictionary<AgentModel, List<MissionModel>> agentsMissions = new();
+
+            var agents = await GetAllAgentsAsync();
+            foreach (var agent in agents)
+            {
+                agentsMissions[agent] = await CheckPosibilityMissionToAgent(agent);
+            }
+
+            return agentsMissions;
+        }
+
+        public async Task UpdateAllAgentsKillMission()
+        {
+            var missions = await missionService.GetAllMissionsAsync();
+            var missionAssigned = missions.Where(m => m.Status == StatusMission.Assigned).ToList();
+
+            missions.ForEach(async m => await UpdateAgentLocationKillMission(m.Agent, m.Target));
         }
     }
 }

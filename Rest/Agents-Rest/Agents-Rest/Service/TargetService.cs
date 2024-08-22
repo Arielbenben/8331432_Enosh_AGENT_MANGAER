@@ -6,8 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Agents_Rest.Service
 {
-    public class TargetService(ApplicationDbContext context, IMissionService missionService) : ITargetService
+    public class TargetService(ApplicationDbContext context, IServiceProvider serviceProvider) : ITargetService
     {
+
+        private IMissionService missionService = serviceProvider.GetRequiredService<MissionService>();
 
         private readonly Dictionary<string, (int x, int y)> directions = new()
         {
@@ -100,7 +102,8 @@ namespace Agents_Rest.Service
             }
             else
             {
-                throw new Exception("The location is out of range");
+                throw new Exception($"The location is out of range," +
+                    $" current location: {(target.Location_x, target.Location_y)}");
             }
         }
 

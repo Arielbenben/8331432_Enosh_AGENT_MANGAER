@@ -5,8 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Agents_Rest.Service
 {
-    public class MissionService(ApplicationDbContext context, IAgentService agentService) : IMissionService
+    public class MissionService(ApplicationDbContext context, IServiceProvider serviceProvider) : IMissionService
     {
+
+        private IAgentService agentService = serviceProvider.GetRequiredService<IAgentService>();
+
         public async Task<List<MissionModel>> GetAllMissionsAsync()
         {
             var missions = await context.Missions.ToListAsync();
@@ -32,10 +35,13 @@ namespace Agents_Rest.Service
             return;
         }
 
-        public double CalculateTimeLeft(AgentModel agent, TargetModel target)
+        public async Task CalculateTimeLeft(MissionModel mission)
         {
-            var distance = CalculateDistance(agent, target);
-            return distance / 5;
+            double distance = CalculateDistance(mission.Agent, mission.Target);
+            mission.TimeLeft = distance;
+
+            await context.SaveChangesAsync();
+            return;
         }
 
         public async Task UpdateMissionAgentLocation(MissionModel mission)
@@ -44,15 +50,35 @@ namespace Agents_Rest.Service
             return;
         }
 
-        public async Task UpdateMissionAssigned(MissionModel mission, AgentModel agent)
+        public async Task UpdateMissionAssigned(MissionModel mission)
         {
             mission.Status = StatusMission.Assigned;
-            mission.Agent = agent;
+
+            context.Missions.RemoveRange(await context.Missions
+                .Where(m => m.Target == mission.Target)
+                .Where(m => m.Status == StatusMission.Offer).ToListAsync());
+
+            await agentService.RefreshAllAgentsPosibilityMissions();
 
             await context.SaveChangesAsync();
             return;
         }
-    }
 
-    
+        public async Task UpdateMissiomMoveAgentsActive()
+        {
+            await agentService.UpdateAllAgentsKillMission();
+            return;
+        }
+
+        public async Task UpdateAllMissionsTimeLeft()
+        {
+            var missions = await GetAllMissionsAsync();
+            var missionAssigned = missions.Where(m => m.Status == StatusMission.Assigned).ToList();
+
+            missions.ForEach(async m => await CalculateTimeLeft(m));
+            return;
+        }
+
+
+    }
 }
