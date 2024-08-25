@@ -99,8 +99,8 @@ namespace Agents_Rest.Service
             var target = await _context.Targets.FirstOrDefaultAsync(_context => _context.Id == id) ??
                 throw new Exception("The target not exists");
 
-            target.Location_x = setLocationAgentDto.X;
-            target.Location_y = setLocationAgentDto.Y;
+            target.LocationX = setLocationAgentDto.X;
+            target.LocationY = setLocationAgentDto.Y;
 
             await _context.SaveChangesAsync();
 
@@ -117,13 +117,13 @@ namespace Agents_Rest.Service
 
             if (CheckLocationInRange(target, (x, y)))
             {
-                target.Location_x += x;
-                target.Location_y += y;
+                target.LocationX += x;
+                target.LocationY += y;
             }
             else
             {
                 throw new Exception($"The location is out of range," +
-                    $" current location: {(target.Location_x, target.Location_y)}");
+                    $" current location: {(target.LocationX, target.LocationY)}");
             }
 
             var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
@@ -132,8 +132,8 @@ namespace Agents_Rest.Service
 
         public bool CheckLocationInRange(TargetModel target, (int x, int y) location)
         {
-            return target.Location_x + location.x >= 0 && target.Location_x + location.x <= 1000
-                && target.Location_y + location.y >= 0 && target.Location_y + location.y <= 1000;
+            return target.LocationX + location.x >= 0 && target.LocationX + location.x <= 1000
+                && target.LocationY + location.y >= 0 && target.LocationY + location.y <= 1000;
         }
 
         public async Task<bool> TargetIsvalid(TargetModel target) // check

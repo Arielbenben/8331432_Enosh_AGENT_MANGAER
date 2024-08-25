@@ -34,10 +34,10 @@ namespace Agents_Rest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Location_x")
+                    b.Property<int>("LocationX")
                         .HasColumnType("int");
 
-                    b.Property<int>("Location_y")
+                    b.Property<int>("LocationY")
                         .HasColumnType("int");
 
                     b.Property<string>("NickName")
@@ -98,10 +98,10 @@ namespace Agents_Rest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Location_x")
+                    b.Property<int>("LocationX")
                         .HasColumnType("int");
 
-                    b.Property<int>("Location_y")
+                    b.Property<int>("LocationY")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -112,8 +112,9 @@ namespace Agents_Rest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

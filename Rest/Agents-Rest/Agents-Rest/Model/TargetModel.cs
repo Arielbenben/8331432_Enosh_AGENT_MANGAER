@@ -18,8 +18,8 @@ namespace Agents_Rest.Model
 
         [Required]
         public string Position { get; set; }
-        public int Location_x { get; set; } = 0;
-        public int Location_y { get; set; } = 0;
+        public int LocationX { get; set; } = 0;
+        public int LocationY { get; set; } = 0;
         public string Image_url { get; set; }
         public StatusTarget Status { get; set; } = StatusTarget.Living;
 

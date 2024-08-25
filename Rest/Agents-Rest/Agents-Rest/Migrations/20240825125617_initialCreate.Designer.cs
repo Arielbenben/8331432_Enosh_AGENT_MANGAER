@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agents_Rest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240825093225_initialCreate")]
+    [Migration("20240825125617_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -37,10 +37,10 @@ namespace Agents_Rest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Location_x")
+                    b.Property<int>("LocationX")
                         .HasColumnType("int");
 
-                    b.Property<int>("Location_y")
+                    b.Property<int>("LocationY")
                         .HasColumnType("int");
 
                     b.Property<string>("NickName")
@@ -101,10 +101,10 @@ namespace Agents_Rest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Location_x")
+                    b.Property<int>("LocationX")
                         .HasColumnType("int");
 
-                    b.Property<int>("Location_y")
+                    b.Property<int>("LocationY")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -115,8 +115,9 @@ namespace Agents_Rest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -97,8 +97,8 @@ namespace Agents_Rest.Service
             var agent = await _context.Agents.FirstOrDefaultAsync(x => x.Id == id)
                 ?? throw new Exception("The agent not exists");
             
-            agent.Location_x = setLocationAgentDto.X;
-            agent.Location_y = setLocationAgentDto.Y;
+            agent.LocationX = setLocationAgentDto.X;
+            agent.LocationY = setLocationAgentDto.Y;
 
             await _context.SaveChangesAsync();
 
@@ -121,13 +121,13 @@ namespace Agents_Rest.Service
 
             if (CheckLocationInRange(agent, (x, y)))
             {
-                agent.Location_x += x;
-                agent.Location_y += y;
+                agent.LocationX += x;
+                agent.LocationY += y;
             }
             else
             {
                 throw new Exception($"The location is out of range," +
-                    $" current location: {(agent.Location_x, agent.Location_y)}");
+                    $" current location: {(agent.LocationX, agent.LocationY)}");
             }
 
             await _context.SaveChangesAsync();
@@ -139,34 +139,28 @@ namespace Agents_Rest.Service
 
         public bool CheckLocationInRange(AgentModel agent, (int x, int y) location)
         {
-            return agent.Location_x + location.x >= 0 && agent.Location_x + location.x <= 1000
-                && agent.Location_y + location.y >= 0 && agent.Location_y + location.y <= 1000;
+            return agent.LocationX + location.x >= 0 && agent.LocationX + location.x <= 1000
+                && agent.LocationY + location.y >= 0 && agent.LocationY + location.y <= 1000;
         }
+
+        private int ComputePostion(int x, int y) => x.CompareTo(y) switch
+        {
+            -1 => 1,
+            1 =>  - 1,
+            _ => 0
+        };
 
         public async Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target)
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
+            
+            int agentX = agent.LocationX + ComputePostion(agent.LocationX, target.LocationX);
 
-            switch (agent.Location_x.CompareTo(target.Location_x))
-            {
-                case -1:
-                    agent.Location_x++;
-                    break;
-                case 1:
-                    agent.Location_x--;
-                    break;
-                default: throw new Exception("The location_x is In valid");
-            }
-            switch (agent.Location_y.CompareTo(target.Location_y))
-            {
-                case -1:
-                    agent.Location_y++;
-                    break;
-                case 1:
-                    agent.Location_y--;
-                    break;
-                default: throw new Exception("The location_y is In Valid");
-            }
+            int agentY = agent.LocationY + ComputePostion(agent.LocationY, target.LocationY);
+
+            agent.LocationX = agentX;
+            agent.LocationY = agentY;   
+           
             await _context.SaveChangesAsync();
             return;
         }

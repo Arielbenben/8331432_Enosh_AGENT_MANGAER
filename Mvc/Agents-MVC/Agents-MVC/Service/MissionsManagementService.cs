@@ -15,7 +15,7 @@ namespace Agents_MVC.Service
 
             var request = new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/getOffers");
 
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.Token); // check the tokken
+            //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.Token); // check the tokken
 
             var response = await httpClient.SendAsync(request);
 

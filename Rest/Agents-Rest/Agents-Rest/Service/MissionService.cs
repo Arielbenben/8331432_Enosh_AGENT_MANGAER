@@ -99,8 +99,8 @@ namespace Agents_Rest.Service
         {
             foreach (var mission in MissionsAssigned)
             {
-                if(mission.Target.Location_x == mission.Agent.Location_x && 
-                    mission.Target.Location_y == mission.Agent.Location_y)
+                if(mission.Target.LocationX == mission.Agent.LocationX && 
+                    mission.Target.LocationY == mission.Agent.LocationY)
                 {
                     mission.Agent.Status = StatusAgent.Dormant;
                     mission.Status = StatusMission.Eliminated;

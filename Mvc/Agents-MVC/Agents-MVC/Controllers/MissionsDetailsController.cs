@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Agents_MVC.Service;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Agents_MVC.Controllers
 {
-    public class MissionsDetailsController : Controller
+    public class MissionsDetailsController(IMissionDetailsService detailsService) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int id)
         {
-            return View();
+            var mission = await detailsService.GetMissionById(id);
+            return View(mission);
         }
     }
 }

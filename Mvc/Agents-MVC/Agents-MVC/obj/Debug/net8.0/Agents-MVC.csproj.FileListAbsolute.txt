@@ -6,3 +6,4 @@ C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MV
 C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.RazorAssemblyInfo.cache
 C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.RazorAssemblyInfo.cs
 C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.sourcelink.json
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.csproj.AssemblyReference.cache
