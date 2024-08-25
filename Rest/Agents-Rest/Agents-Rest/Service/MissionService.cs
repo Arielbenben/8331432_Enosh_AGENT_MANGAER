@@ -5,43 +5,55 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Agents_Rest.Service
 {
-    public class MissionService(ApplicationDbContext context, IServiceProvider serviceProvider) : IMissionService
+    public class MissionService(IServiceProvider serviceProvider) : IMissionService
     {
 
         private IAgentService agentService => serviceProvider.GetRequiredService<IAgentService>();
 
         public async Task<List<MissionModel>> GetAllMissionsAsync()
         {
-            var missions = await context.Missions.ToListAsync();
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var missions = await _context.Missions.Include(m => m.Target).Include(m => m.Agent).ToListAsync();
             if (missions == null) throw new Exception("The is not missions");
 
             return missions;
         }
 
+        public async Task<Dictionary<AgentModel, List<MissionModel>>> GetAllMissionsOffersToAgents()
+        {
+            var AllOffersToAgents = await agentService.RefreshAllAgentsPosibilityMissions();
+            return AllOffersToAgents;
+        }
+
         public async Task CreateMission(AgentModel agent, TargetModel target)
         {
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
             MissionModel mission = new()
             {
-                Agent = agent,
                 AgentId = agent.Id,
-                Target = target,
+               
                 TargetId = target.Id
+              
                 // time left = 
             };
 
-            await context.Missions.AddAsync(mission);
-            await context.SaveChangesAsync();
+            await _context.Missions.AddAsync(mission);
+            await _context.SaveChangesAsync();
 
             return;
         }
 
         public async Task CalculateTimeLeft(MissionModel mission)
         {
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
             double distance = CalculateDistance(mission.Agent, mission.Target);
             mission.TimeLeft = distance;
 
-            await context.SaveChangesAsync();
-            return;
+            await _context.SaveChangesAsync();
+            return ;
         }
 
         public async Task UpdateMissionAgentLocation(MissionModel mission)
@@ -52,16 +64,19 @@ namespace Agents_Rest.Service
 
         public async Task UpdateMissionAssigned(MissionModel mission)
         {
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
             mission.Status = StatusMission.Assigned;
             mission.Agent.Status = StatusAgent.Active;
             mission.Target.Status = StatusTarget.Assigned;
 
-            context.Missions.RemoveRange(await context.Missions
+            _context.Missions.RemoveRange(await _context.Missions
                 .Where(m => m.Target == mission.Target)
                 .Where(m => m.Status == StatusMission.Offer).ToListAsync());
 
             var potencialMisiions = await agentService.RefreshAllAgentsPosibilityMissions();
-            await context.SaveChangesAsync();
+
+            await _context.SaveChangesAsync();
             return;
         }
 
@@ -89,14 +104,18 @@ namespace Agents_Rest.Service
                 {
                     mission.Agent.Status = StatusAgent.Dormant;
                     mission.Status = StatusMission.Eliminated;
-
+                    await RefreshAllMissiomMap();
                 }  
             }
+            return;
         }
 
         public async Task<List<MissionModel>> RefreshAllMissiomMap()
         {
-            var allMissionLiving = await context.Missions.Where(m => m.Status == StatusMission.Offer).ToListAsync();
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var allMissionLiving = await _context.Missions.Where(m => m.Status == StatusMission.Offer)
+                .Include(m => m.Agent).Include(m => m.Target).ToListAsync();
             return allMissionLiving;
         }
 

@@ -12,6 +12,7 @@ namespace Agents_Rest.Service
         Task UpdateMissiomMoveAgentsActive();
         Task UpdateAllMissionsTimeLeft();
         Task<List<MissionModel>> RefreshAllMissiomMap();
+        Task<Dictionary<AgentModel, List<MissionModel>>> GetAllMissionsOffersToAgents();
 
     }
 }

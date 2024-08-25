@@ -31,15 +31,18 @@ namespace Agents_Rest.Data
 
             modelBuilder.Entity<MissionModel>()
                 .Property(m => m.Status)
-                .HasConversion<string>();
+                .HasConversion<string>()
+                .IsRequired();
 
             modelBuilder.Entity<AgentModel>()
                 .Property(a => a.Status)
-                .HasConversion<string>();
+                .HasConversion<string>()
+                .IsRequired();
 
-            modelBuilder.Entity<AgentModel>()
+            modelBuilder.Entity<TargetModel>()
                 .Property(a => a.Status)
-                .HasConversion<string>();
+                .HasConversion<string>()
+                .IsRequired();
 
             base.OnModelCreating(modelBuilder);
         }

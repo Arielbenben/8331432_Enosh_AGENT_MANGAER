@@ -21,7 +21,7 @@ namespace Agents_Rest.Migrations
                     Image_url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location_x = table.Column<int>(type: "int", nullable: false),
                     Location_y = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,7 +39,7 @@ namespace Agents_Rest.Migrations
                     Location_x = table.Column<int>(type: "int", nullable: false),
                     Location_y = table.Column<int>(type: "int", nullable: false),
                     Image_url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StatusTarget = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,9 +54,9 @@ namespace Agents_Rest.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AgentId = table.Column<int>(type: "int", nullable: false),
                     TargetId = table.Column<int>(type: "int", nullable: false),
-                    TimeLeft = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeLeft = table.Column<double>(type: "float", nullable: false),
                     ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

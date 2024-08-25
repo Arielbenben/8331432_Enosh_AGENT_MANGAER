@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Agents_Rest.Model
+﻿namespace Agents_MVC.Models
 {
     public enum StatusTarget
     {
@@ -12,11 +10,7 @@ namespace Agents_Rest.Model
     public class TargetModel
     {
         public int Id { get; set; }
-
-        [Required]
         public string Name { get; set; }
-
-        [Required]
         public string Position { get; set; }
         public int Location_x { get; set; } = 0;
         public int Location_y { get; set; } = 0;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System.Collections.Immutable;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -7,9 +8,12 @@ namespace Agents_Rest.Service
 {
     public class JwtService(IConfiguration configuration) : IJwtService
     {
+        public readonly ImmutableList<string> AllowedServers = ["MVCServer", "SimulationServe"];
+
+        public bool IsValidName(string name) => AllowedServers.Contains(name);
         public string GenerateToken(string uniqueIdentifier)
         {
-            string key = configuration.GetValue("Jwt:Key", string.Empty)
+            string key = configuration.GetValue<string?>("Jwt:Key", null)
                 ?? throw new ArgumentNullException("Key does not exists on Jwt");
 
             int expiry = configuration.GetValue("Jwt:ExpiryInMinutes", 60);
@@ -19,8 +23,8 @@ namespace Agents_Rest.Service
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, "SimulationServer"),
-                new Claim(ClaimTypes.NameIdentifier, "MVCServer")
+                new Claim(ClaimTypes.Name, uniqueIdentifier),
+            
             };
 
             var token = new JwtSecurityToken(

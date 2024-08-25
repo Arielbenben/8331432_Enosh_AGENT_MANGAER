@@ -21,9 +21,11 @@ namespace Agents_Rest
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(
-                builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<ApplicationDbContext>((sp, options) =>
+            {
+                var configuration = sp.GetRequiredService<IConfiguration>();
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            }, ServiceLifetime.Scoped);
 
             builder.Services.AddScoped<IAgentService, AgentService>();
             builder.Services.AddScoped<ITargetService, TargetService>();
@@ -40,7 +42,7 @@ namespace Agents_Rest
                        ValidateIssuerSigningKey = true,
                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
                        ValidAudience = builder.Configuration["Jwt:Audience"],
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
                    };
                }); builder.Services.AddMvc();
 

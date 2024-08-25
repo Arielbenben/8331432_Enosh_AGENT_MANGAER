@@ -1,12 +1,292 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\service\\missionsmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\service\\missionsmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\service\\imissionsmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\service\\imissionsmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\controllers\\missionsmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\controllers\\missionsmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\service\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\service\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\service\\missionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\service\\missionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\controllers\\missionsdetailscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\controllers\\missionsdetailscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\service\\iloginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\service\\iloginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\models\\targetmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\models\\targetmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\service\\targetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\service\\targetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\service\\itargetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\service\\itargetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\service\\imissiomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\service\\imissiomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\viewsmodel\\missionsmanagementvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\viewsmodel\\missionsmanagementvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\models\\agentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\models\\agentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\controllers\\systemdashboardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\controllers\\systemdashboardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\mvc\\agents-mvc\\agents-mvc\\models\\missionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFCEF393-3261-4711-B656-6FF89498BE93}|Agents-MVC\\Agents-MVC.csproj|solutionrelative:agents-mvc\\models\\missionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginService.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\LoginService.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Service\\LoginService.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\LoginService.cs*",
+              "RelativeToolTip": "Agents-MVC\\Service\\LoginService.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T09:14:22.614Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ILoginService.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\ILoginService.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Service\\ILoginService.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\ILoginService.cs*",
+              "RelativeToolTip": "Agents-MVC\\Service\\ILoginService.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T09:14:10.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Controllers\\LoginController.cs*",
+              "RelativeToolTip": "Agents-MVC\\Controllers\\LoginController.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T09:12:30.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MissionsManagementService.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\MissionsManagementService.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Service\\MissionsManagementService.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\MissionsManagementService.cs*",
+              "RelativeToolTip": "Agents-MVC\\Service\\MissionsManagementService.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:58:59.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IMissionsManagementService.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\IMissionsManagementService.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Service\\IMissionsManagementService.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\IMissionsManagementService.cs*",
+              "RelativeToolTip": "Agents-MVC\\Service\\IMissionsManagementService.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:58:51.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MissionService.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\MissionService.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Service\\MissionService.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\MissionService.cs*",
+              "RelativeToolTip": "Agents-MVC\\Service\\MissionService.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:57:28.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TargetModel.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Models\\TargetModel.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Models\\TargetModel.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Models\\TargetModel.cs*",
+              "RelativeToolTip": "Agents-MVC\\Models\\TargetModel.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:34:04.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MissionsDetailsController.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Controllers\\MissionsDetailsController.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Controllers\\MissionsDetailsController.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Controllers\\MissionsDetailsController.cs",
+              "RelativeToolTip": "Agents-MVC\\Controllers\\MissionsDetailsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:38:38.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MissionsManagementController.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Controllers\\MissionsManagementController.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Controllers\\MissionsManagementController.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Controllers\\MissionsManagementController.cs*",
+              "RelativeToolTip": "Agents-MVC\\Controllers\\MissionsManagementController.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:38:08.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TargetService.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\TargetService.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Service\\TargetService.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\TargetService.cs*",
+              "RelativeToolTip": "Agents-MVC\\Service\\TargetService.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:58:28.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ITargetService.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\ITargetService.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Service\\ITargetService.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\ITargetService.cs",
+              "RelativeToolTip": "Agents-MVC\\Service\\ITargetService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:58:03.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IMissiomService.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\IMissiomService.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Service\\IMissiomService.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Service\\IMissiomService.cs",
+              "RelativeToolTip": "Agents-MVC\\Service\\IMissiomService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:57:17.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MissionsManagementVM.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\ViewsModel\\MissionsManagementVM.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\ViewsModel\\MissionsManagementVM.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\ViewsModel\\MissionsManagementVM.cs*",
+              "RelativeToolTip": "Agents-MVC\\ViewsModel\\MissionsManagementVM.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:50:02.474Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SystemDashboardsController.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Controllers\\SystemDashboardsController.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Controllers\\SystemDashboardsController.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Controllers\\SystemDashboardsController.cs",
+              "RelativeToolTip": "Agents-MVC\\Controllers\\SystemDashboardsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:40:39.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "MissionModel.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Models\\MissionModel.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Models\\MissionModel.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Models\\MissionModel.cs*",
+              "RelativeToolTip": "Agents-MVC\\Models\\MissionModel.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:34:23.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AgentModel.cs",
+              "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Models\\AgentModel.cs",
+              "RelativeDocumentMoniker": "Agents-MVC\\Models\\AgentModel.cs",
+              "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Mvc\\Agents-MVC\\Agents-MVC\\Models\\AgentModel.cs*",
+              "RelativeToolTip": "Agents-MVC\\Models\\AgentModel.cs*",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAxwAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T07:33:53.186Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

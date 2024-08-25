@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Agents_Rest.Service
 {
-    public class TargetService(ApplicationDbContext context, IServiceProvider serviceProvider) : ITargetService
+    public class TargetService(IServiceProvider serviceProvider) : ITargetService
     {
+        private IMissionService missionService => serviceProvider.GetRequiredService<IMissionService>();
 
-        private IMissionService missionService => serviceProvider.GetRequiredService<MissionService>();
 
         private readonly Dictionary<string, (int x, int y)> directions = new()
         {
@@ -25,15 +25,17 @@ namespace Agents_Rest.Service
 
         public async Task<TargetIdDto> CreateTarget(TargetDto targetDto)
         {
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
             TargetModel newTarget = new()
             {
-                Name = targetDto.Name,
-                Position = targetDto.Position,
+                Name = targetDto.name,
+                Position = targetDto.position,
                 Image_url = targetDto.PhotoUrl
             };
 
-            await context.Targets.AddAsync(newTarget);
-            await context.SaveChangesAsync();
+            await _context.Targets.AddAsync(newTarget);
+            await _context.SaveChangesAsync();
 
 
             TargetIdDto targetIdDto = new () { Id = newTarget.Id };
@@ -43,24 +45,30 @@ namespace Agents_Rest.Service
 
         public async Task DeleteTargetByIdAsync(int id)
         {
-            var target = await context.Targets.FirstOrDefaultAsync(x => x.Id == id);
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var target = await _context.Targets.FirstOrDefaultAsync(x => x.Id == id);
             if (target == null) throw new Exception("Delete request was wrong");
 
-            context.Targets.Remove(target);
-            await context.SaveChangesAsync();
+            _context.Targets.Remove(target);
+            await _context.SaveChangesAsync();
             return;
         }
 
         public async Task<TargetModel> GetTargetByIdAsync(int id)
         {
-            var target = await context.Targets.FirstOrDefaultAsync(t => t.Id == id);
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var target = await _context.Targets.FirstOrDefaultAsync(t => t.Id == id);
             if (target == null) throw new Exception("The target is not exists");
 
             return target;
         }
         public async Task<List<TargetModel>> GetAllTargetsAsync()
         {
-            var targets = await context.Targets.ToListAsync();
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var targets = await _context.Targets.ToListAsync();
             if (targets == null) throw new Exception("There is not targets");
 
             return targets;
@@ -68,14 +76,16 @@ namespace Agents_Rest.Service
 
         public async Task UpdateTargetByIdAsync(int id, TargetDto targetDto)
         {
-            var target = await context.Targets.FirstOrDefaultAsync(t => t.Id == id);
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var target = await _context.Targets.FirstOrDefaultAsync(t => t.Id == id);
             if (target == null) throw new Exception("The target is not exists");
 
-            target.Name = targetDto.Name;
-            target.Position = targetDto.Position;
+            target.Name = targetDto.name;
+            target.Position = targetDto.position;
             target.Image_url = targetDto.PhotoUrl;
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
 
@@ -84,12 +94,15 @@ namespace Agents_Rest.Service
 
         public async Task SetLocation(int id, SetLocationDto setLocationAgentDto)
         {
-            var target = await GetTargetByIdAsync(id);
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var target = await _context.Targets.FirstOrDefaultAsync(_context => _context.Id == id) ??
+                throw new Exception("The target not exists");
 
             target.Location_x = setLocationAgentDto.X;
             target.Location_y = setLocationAgentDto.Y;
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
 
@@ -125,19 +138,24 @@ namespace Agents_Rest.Service
 
         public async Task<bool> TargetIsvalid(TargetModel target) // check
         {
-            return !await context.Missions.Where(m => m.Target == target)
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            return !await _context.Missions.Where(m => m.Target == target)
                 .AnyAsync(m => m.Status == StatusMission.Assigned);
         }
 
         public async Task<List<MissionModel>> CheckPosibilityMissionToTarget(TargetModel target)
         {
-            var potentialAgents = await context.Agents.Where(a => a.Status == StatusAgent.Dormant)
-                .Where(a => CalculateDistance(a, target) <= 200).ToListAsync();
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
-            potentialAgents.Select(async p => await missionService.CreateMission(p, target));
+            var dormantAgents = await _context.Agents.Where(a => a.Status == StatusAgent.Dormant).ToListAsync();
+            var potentialAgents = dormantAgents.Where(a => CalculateDistance(a, target) <= 200).ToList();
 
-            var potencialMission = await context.Missions.Where(m => m.Target == target)
-                .Where(m => m.Status == StatusMission.Offer).ToListAsync();
+            potentialAgents.ForEach(async p => await missionService.CreateMission(p, target));
+
+            var potencialMission = await _context.Missions.Where(m => m.Target == target)
+                .Where(m => m.Status == StatusMission.Offer)
+                .Include(m => m.Target).Include(m => m.Agent).ToListAsync();
 
             return potencialMission;
         }

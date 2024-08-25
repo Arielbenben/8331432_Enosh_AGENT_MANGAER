@@ -44,8 +44,9 @@ namespace Agents_Rest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -66,14 +67,15 @@ namespace Agents_Rest.Migrations
                     b.Property<DateTime>("ExecutionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TargetId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TimeLeft")
-                        .HasColumnType("datetime2");
+                    b.Property<double>("TimeLeft")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -110,7 +112,7 @@ namespace Agents_Rest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StatusTarget")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

@@ -1,0 +1,8 @@
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.AssemblyInfoInputs.cache
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.AssemblyInfo.cs
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.csproj.CoreCompileInputs.cache
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.RazorAssemblyInfo.cache
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.RazorAssemblyInfo.cs
+C:\Users\relbh\source\repos\8331432_Enosh_AGENT_MANGAER\Mvc\Agents-MVC\Agents-MVC\obj\Debug\net8.0\Agents-MVC.sourcelink.json
