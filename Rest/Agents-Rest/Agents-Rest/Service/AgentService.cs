@@ -9,8 +9,8 @@ namespace Agents_Rest.Service
 {
     public class AgentService(ApplicationDbContext context, IServiceProvider serviceProvider) : IAgentService
     {
-        private IMissionService missionService = serviceProvider.GetRequiredService<IMissionService>();
-        private ITargetService targetService = serviceProvider.GetRequiredService<ITargetService>();
+        private IMissionService missionService => serviceProvider.GetRequiredService<IMissionService>();
+        private ITargetService targetService => serviceProvider.GetRequiredService<ITargetService>();
 
         private readonly Dictionary<string, (int x, int y)> directions = new()
         {
@@ -52,8 +52,6 @@ namespace Agents_Rest.Service
             await context.Agents.AddAsync(newAgent);
             await context.SaveChangesAsync();
 
-            await CheckPosibilityMissionToAgent(newAgent); // need to check where it go
-
             AgentIdDto agentIdDto = new() { Id = newAgent.Id };
 
             return agentIdDto;
@@ -76,6 +74,9 @@ namespace Agents_Rest.Service
             agent.Image_url = agentDto.PhotoUrl;
 
             await context.SaveChangesAsync();
+
+            var potencialMissions = await CheckPosibilityMissionToAgent(agent); // need to send back
+
             return;
         }
 
@@ -87,6 +88,9 @@ namespace Agents_Rest.Service
             agent.Location_y = setLocationAgentDto.Y;
 
             await context.SaveChangesAsync();
+
+            var potencialMissions = await CheckPosibilityMissionToAgent(agent); // need to check where it go
+
             return;
         }
 
@@ -110,6 +114,12 @@ namespace Agents_Rest.Service
                 throw new Exception($"The location is out of range," +
                     $" current location: {(agent.Location_x, agent.Location_y)}");
             }
+
+            await context.SaveChangesAsync();
+
+            var potencialMissions = await CheckPosibilityMissionToAgent(agent); // need to check where it go
+
+            return;
         }
 
         public bool CheckLocationInRange(AgentModel agent, (int x, int y) location)
@@ -118,59 +128,39 @@ namespace Agents_Rest.Service
                 && agent.Location_y + location.y >= 0 && agent.Location_y + location.y <= 1000;
         }
 
-        public async Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target) // neet to check
+        public async Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target)
         {
-            if(agent.Location_x != target.Location_x && agent.Location_y != target.Location_y)
+            switch (agent.Location_x.CompareTo(target.Location_x))
             {
-                if (agent.Location_x < target.Location_x)
-                    agent.Location_x += 1;
-                if (agent.Location_x > target.Location_x)
-                    agent.Location_x -= 1;
-                if (agent.Location_y < target.Location_y)
-                    agent.Location_y += 1;
-                if (agent.Location_y > target.Location_y)
-                    agent.Location_y -= 1;
-                else throw new Exception("The location is inValid");
-
-                await context.SaveChangesAsync();
-                return;
+                case -1:
+                    agent.Location_x++;
+                    break;
+                case 1:
+                    agent.Location_x--;
+                    break;
+                default: throw new Exception("The location_x is In valid");
             }
-            else
+            switch (agent.Location_y.CompareTo(target.Location_y))
             {
-                if(agent.Location_x != target.Location_x)
-                {
-                    if(agent.Location_x > target.Location_x)
-                        agent.Location_x -= 1;
-                    else
-                        agent.Location_x += 1;
-
-                    if (agent.Location_y < target.Location_y)
-                        agent.Location_y -= 1;
-                    else
-                        agent.Location_y += 1;
-                }
-
-                await context.SaveChangesAsync();
-                return;
+                case -1:
+                    agent.Location_y++;
+                    break;
+                case 1:
+                    agent.Location_y--;
+                    break;
+                default: throw new Exception("The location_y is In Valid");
             }
+            await context.SaveChangesAsync();
+            return;
         }
 
         public async Task<List<MissionModel>> CheckPosibilityMissionToAgent(AgentModel agent)
         {
-            var potentialTargets = await context.Targets.Where(t => t.StatusTarget == StatusTarget.Living)
+            var potentialTargets = await context.Targets.Where(t => t.Status == StatusTarget.Living)
                 .Where(x => CalculateDistance(agent, x) <= 200).ToListAsync();
-
-            foreach (var target in potentialTargets) {
-                if (!await targetService.TargetIsvalid(target))
-                {
-                    potentialTargets.Remove(target);
-                }
-            }
             potentialTargets.Select(async p => await missionService.CreateMission(agent, p));
-
             var potencialMission = await context.Missions.Where(m => m.Agent == agent)
                 .Where(m => m.Status == StatusMission.Offer).ToListAsync();
-
             return potencialMission;
         }
 
@@ -192,7 +182,9 @@ namespace Agents_Rest.Service
             var missions = await missionService.GetAllMissionsAsync();
             var missionAssigned = missions.Where(m => m.Status == StatusMission.Assigned).ToList();
 
-            missions.ForEach(async m => await UpdateAgentLocationKillMission(m.Agent, m.Target));
+            missions.ForEach(async m => await UpdateAgentLocationKillMission(m.Agent, m.Target)); 
+
+            await missionService.RefreshAllMissiomMap();
         }
     }
 }

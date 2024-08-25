@@ -22,13 +22,24 @@ namespace Agents_Rest.Data
                 .WithMany()
                 .HasForeignKey(mission => mission.AgentId)
                 .OnDelete(DeleteBehavior.Restrict);
-                
 
             modelBuilder.Entity<MissionModel>()
                 .HasOne(mission => mission.Target)
                 .WithMany()
                 .HasForeignKey(mission => mission.TargetId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MissionModel>()
+                .Property(m => m.Status)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<AgentModel>()
+                .Property(a => a.Status)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<AgentModel>()
+                .Property(a => a.Status)
+                .HasConversion<string>();
 
             base.OnModelCreating(modelBuilder);
         }

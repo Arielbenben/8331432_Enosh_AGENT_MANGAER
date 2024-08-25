@@ -11,6 +11,7 @@ namespace Agents_Rest.Service
         Task UpdateMissionAssigned(MissionModel mission);
         Task UpdateMissiomMoveAgentsActive();
         Task UpdateAllMissionsTimeLeft();
+        Task<List<MissionModel>> RefreshAllMissiomMap();
 
     }
 }

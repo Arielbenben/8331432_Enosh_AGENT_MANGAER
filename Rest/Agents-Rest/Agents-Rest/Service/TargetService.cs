@@ -9,7 +9,7 @@ namespace Agents_Rest.Service
     public class TargetService(ApplicationDbContext context, IServiceProvider serviceProvider) : ITargetService
     {
 
-        private IMissionService missionService = serviceProvider.GetRequiredService<MissionService>();
+        private IMissionService missionService => serviceProvider.GetRequiredService<MissionService>();
 
         private readonly Dictionary<string, (int x, int y)> directions = new()
         {
@@ -34,6 +34,7 @@ namespace Agents_Rest.Service
 
             await context.Targets.AddAsync(newTarget);
             await context.SaveChangesAsync();
+
 
             TargetIdDto targetIdDto = new () { Id = newTarget.Id };
 
@@ -75,6 +76,9 @@ namespace Agents_Rest.Service
             target.Image_url = targetDto.PhotoUrl;
 
             await context.SaveChangesAsync();
+
+            var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
+
             return;
         }
 
@@ -86,6 +90,9 @@ namespace Agents_Rest.Service
             target.Location_y = setLocationAgentDto.Y;
 
             await context.SaveChangesAsync();
+
+            var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
+
             return;
         }
 
@@ -105,6 +112,9 @@ namespace Agents_Rest.Service
                 throw new Exception($"The location is out of range," +
                     $" current location: {(target.Location_x, target.Location_y)}");
             }
+
+            var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
+            return;
         }
 
         public bool CheckLocationInRange(TargetModel target, (int x, int y) location)

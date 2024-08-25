@@ -9,7 +9,7 @@ namespace Agents_Rest.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class TargetsController(ApplicationDbContext context, ITargetService targetService) : ControllerBase
+    public class TargetsController(ITargetService targetService) : ControllerBase
     {
 
         [HttpGet]

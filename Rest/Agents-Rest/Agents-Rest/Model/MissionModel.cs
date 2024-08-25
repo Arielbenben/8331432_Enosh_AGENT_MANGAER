@@ -4,7 +4,7 @@
     {
         Offer,
         Assigned,
-        Done
+        Eliminated
     }
     public class MissionModel
     {

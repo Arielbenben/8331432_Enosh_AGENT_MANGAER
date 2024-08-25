@@ -8,7 +8,7 @@ namespace Agents_Rest.Service
     public class MissionService(ApplicationDbContext context, IServiceProvider serviceProvider) : IMissionService
     {
 
-        private IAgentService agentService = serviceProvider.GetRequiredService<IAgentService>();
+        private IAgentService agentService => serviceProvider.GetRequiredService<IAgentService>();
 
         public async Task<List<MissionModel>> GetAllMissionsAsync()
         {
@@ -53,13 +53,14 @@ namespace Agents_Rest.Service
         public async Task UpdateMissionAssigned(MissionModel mission)
         {
             mission.Status = StatusMission.Assigned;
+            mission.Agent.Status = StatusAgent.Active;
+            mission.Target.Status = StatusTarget.Assigned;
 
             context.Missions.RemoveRange(await context.Missions
                 .Where(m => m.Target == mission.Target)
                 .Where(m => m.Status == StatusMission.Offer).ToListAsync());
 
-            await agentService.RefreshAllAgentsPosibilityMissions();
-
+            var potencialMisiions = await agentService.RefreshAllAgentsPosibilityMissions();
             await context.SaveChangesAsync();
             return;
         }
@@ -77,6 +78,26 @@ namespace Agents_Rest.Service
 
             missions.ForEach(async m => await CalculateTimeLeft(m));
             return;
+        }
+
+        public async Task CheckIfCompleteMission(List<MissionModel> MissionsAssigned)
+        {
+            foreach (var mission in MissionsAssigned)
+            {
+                if(mission.Target.Location_x == mission.Agent.Location_x && 
+                    mission.Target.Location_y == mission.Agent.Location_y)
+                {
+                    mission.Agent.Status = StatusAgent.Dormant;
+                    mission.Status = StatusMission.Eliminated;
+
+                }  
+            }
+        }
+
+        public async Task<List<MissionModel>> RefreshAllMissiomMap()
+        {
+            var allMissionLiving = await context.Missions.Where(m => m.Status == StatusMission.Offer).ToListAsync();
+            return allMissionLiving;
         }
 
 
