@@ -7,7 +7,7 @@ namespace Agents_MVC.Service
 {
     public class MissionsManagementService(IHttpClientFactory clientFactory) :IMissionsManagementService
     {
-        private readonly string baseUrl = "https://localhost:7169";
+        private readonly string baseUrl = "https://localhost:5102";
 
         public async Task<Dictionary<AgentModel, List<MissionModel>>> GetAllOffers()
         {

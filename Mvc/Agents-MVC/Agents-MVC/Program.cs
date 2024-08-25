@@ -1,3 +1,5 @@
+using Agents_MVC.Service;
+
 namespace Agents_MVC
 {
     public class Program
@@ -8,6 +10,11 @@ namespace Agents_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IMissionDetailsService, MissionDetailsService>();
+            builder.Services.AddScoped<IMissionsManagementService, MissionsManagementService>();
+            builder.Services.AddScoped<ILoginService, LoginService>();
+            builder.Services.AddScoped<ISystemDashboardService, SystemDashboardService>();
 
             var app = builder.Build();
 

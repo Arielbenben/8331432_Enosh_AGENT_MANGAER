@@ -25,6 +25,21 @@ namespace Agents_Rest.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<MissionModel>> GetMissionById(int id)
+        {
+            try
+            {
+                return Ok(await missionService.GetMissionById(id));
+            }
+            catch
+            {
+                return BadRequest("Get request was wrong");
+            }
+        }
+
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -14,7 +14,7 @@ namespace Agents_Rest.Service
         Task MoveLocation(int id, MoveLocationDto moveLocationDto);
         bool CheckLocationInRange(AgentModel agent, (int x, int y) location);
         Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target);
-        Task<Dictionary<AgentModel, List<MissionModel>>> RefreshAllAgentsPosibilityMissions();
+        Task<Dictionary<int, List<MissionModel>>> RefreshAllAgentsPosibilityMissions();
         Task UpdateAllAgentsKillMission();
     }
 }

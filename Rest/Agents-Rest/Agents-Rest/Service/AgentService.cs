@@ -143,20 +143,23 @@ namespace Agents_Rest.Service
                 && agent.LocationY + location.y >= 0 && agent.LocationY + location.y <= 1000;
         }
 
-        private int ComputePostion(int x, int y) => x.CompareTo(y) switch
-        {
-            -1 => 1,
-            1 =>  - 1,
-            _ => 0
-        };
-
-        public async Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target)
+        public async Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target) // check 
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
             
-            int agentX = agent.LocationX + ComputePostion(agent.LocationX, target.LocationX);
+            int agentX = agent.LocationX.CompareTo(target.LocationX) switch
+            {
+                -1 => agent.LocationX + 1,
+                1 => agent.LocationY - 1,
+                _ => 0
+            };
 
-            int agentY = agent.LocationY + ComputePostion(agent.LocationY, target.LocationY);
+            int agentY = agent.LocationY.CompareTo(target.LocationY) switch
+            {
+                -1 => agent.LocationY + 1,
+                1 => agent.LocationY - 1,
+                _ => 0
+            }; 
 
             agent.LocationX = agentX;
             agent.LocationY = agentY;   
@@ -190,14 +193,14 @@ namespace Agents_Rest.Service
             }
         }
 
-        public async Task<Dictionary<AgentModel, List<MissionModel>>> RefreshAllAgentsPosibilityMissions()
+        public async Task<Dictionary<int, List<MissionModel>>> RefreshAllAgentsPosibilityMissions()
         {
-            Dictionary<AgentModel, List<MissionModel>> agentsMissions = new();
+            Dictionary<int, List<MissionModel>> agentsMissions = new();
 
             var agents = await GetAllAgentsAsync();
             foreach (var agent in agents)
             {
-                agentsMissions[agent] = await CheckPosibilityMissionToAgent(agent);
+                agentsMissions[agent.Id] = await CheckPosibilityMissionToAgent(agent);
             }
 
             return agentsMissions;

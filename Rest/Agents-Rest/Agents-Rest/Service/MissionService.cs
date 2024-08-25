@@ -20,7 +20,19 @@ namespace Agents_Rest.Service
             return missions;
         }
 
-        public async Task<Dictionary<AgentModel, List<MissionModel>>> GetAllMissionsOffersToAgents()
+        public async Task<MissionModel> GetMissionById(int id)
+        {
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var mission = await _context.Missions.Include(m => m.Target)
+                .Include(m => m.Agent).FirstOrDefaultAsync(m => m.Id == id);
+
+            if (mission == null) throw new Exception("The mission is not exists");
+
+            return mission;
+        }
+
+        public async Task<Dictionary<int, List<MissionModel>>> GetAllMissionsOffersToAgents()
         {
             var AllOffersToAgents = await agentService.RefreshAllAgentsPosibilityMissions();
             return AllOffersToAgents;
@@ -33,10 +45,7 @@ namespace Agents_Rest.Service
             MissionModel mission = new()
             {
                 AgentId = agent.Id,
-               
                 TargetId = target.Id
-              
-                // time left = 
             };
 
             await _context.Missions.AddAsync(mission);

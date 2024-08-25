@@ -8,9 +8,10 @@ namespace Agents_Rest.Service
 {
     public class JwtService(IConfiguration configuration) : IJwtService
     {
-        public readonly ImmutableList<string> AllowedServers = ["MVCServer", "SimulationServe"];
+        public readonly ImmutableList<string> AllowedServers = ["MVCServer", "SimulationServer"];
 
         public bool IsValidName(string name) => AllowedServers.Contains(name);
+
         public string GenerateToken(string uniqueIdentifier)
         {
             string key = configuration.GetValue<string?>("Jwt:Key", null)
