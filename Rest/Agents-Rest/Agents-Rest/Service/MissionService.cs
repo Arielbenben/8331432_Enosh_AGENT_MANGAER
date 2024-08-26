@@ -76,9 +76,12 @@ namespace Agents_Rest.Service
             return;
         }
 
-        public async Task UpdateMissionAssigned(MissionModel mission)
+        public async Task UpdateMissionAssigned(int id)
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var mission = await _context.Missions.FirstOrDefaultAsync(m => m.Id == id);
+            if (mission == null) throw new Exception("The mission not exists");
 
             mission.Status = StatusMission.Assigned;
             mission.Agent.Status = StatusAgent.Active;

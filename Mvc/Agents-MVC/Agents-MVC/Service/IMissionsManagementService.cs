@@ -1,9 +1,10 @@
 ﻿using Agents_MVC.Models;
+using Agents_MVC.ViewModel;
 
 namespace Agents_MVC.Service
 {
     public interface IMissionsManagementService
     {
-        Task<Dictionary<AgentModel, List<MissionModel>>> GetAllOffers();
+        Task<List<MissionManagementVM>> CreateAllMissionsVm();
     }
 }

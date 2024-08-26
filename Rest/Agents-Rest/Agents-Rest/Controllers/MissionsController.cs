@@ -44,11 +44,11 @@ namespace Agents_Rest.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateMissionToAssigned(MissionModel mission)
+        public async Task<ActionResult> UpdateMissionToAssigned(int id)
         {
             try
             {
-                await missionService.UpdateMissionAssigned(mission);
+                await missionService.UpdateMissionAssigned(id);
                 return Ok("Updated");
             }
             catch

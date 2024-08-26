@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Text;
 using Agents_MVC.Models;
+using Agents_MVC.ViewModel;
 
 namespace Agents_MVC.Service
 {
@@ -9,11 +10,11 @@ namespace Agents_MVC.Service
     {
         private readonly string baseUrl = "http://localhost:5102";
 
-        public async Task<Dictionary<AgentModel, List<MissionModel>>> GetAllOffers()
+        public async Task<List<MissionModel>> GetAllOffers()
         {
             var httpClient = clientFactory.CreateClient();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/getOffers");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/missions");
 
             //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.Token); // check the tokken
 
@@ -23,13 +24,37 @@ namespace Agents_MVC.Service
             {
                 var content = await response.Content.ReadAsStringAsync();
 
-                Dictionary<AgentModel, List<MissionModel>>? Offers = JsonSerializer.Deserialize<Dictionary<
-                    AgentModel, List<MissionModel>>>(content, new JsonSerializerOptions()
+                List<MissionModel>? Offers = JsonSerializer.Deserialize<
+                   List<MissionModel>>(content, new JsonSerializerOptions()
                 { PropertyNameCaseInsensitive = true });
 
                 return Offers!;
             }
-            return new Dictionary<AgentModel, List<MissionModel>>();
+            return new List<MissionModel>();
+        }
+
+        public async Task<List<MissionManagementVM>> CreateAllMissionsVm()
+        {
+            var allMissions = await GetAllOffers();
+            List<MissionManagementVM> mmvm = [];
+            foreach (var mission in allMissions)
+            {
+                MissionManagementVM managementVM = new()
+                {
+                    Id = mission.Id,
+                    AgentNickName = mission.Agent.NickName,
+                    AgentLocationX = mission.Agent.LocationX,
+                    AgentLocationY = mission.Agent.LocationY,
+                    TargetName = mission.Target.Name,
+                    TargetPosition = mission.Target.Position,
+                    TargetLocationX = mission.Target.LocationX,
+                    TargetLocationY = mission.Target.LocationY,
+                    Distance = mission.TimeLeft * 5,
+                    TimeLeft = mission.TimeLeft
+                };
+                mmvm.Add(managementVM);
+            }
+            return mmvm;
         }
 
     }

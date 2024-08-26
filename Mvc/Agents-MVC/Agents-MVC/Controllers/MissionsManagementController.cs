@@ -8,8 +8,13 @@ namespace Agents_MVC.Controllers
         
         public async Task<IActionResult> Index()
         {
-            var allOffers = await managementService.GetAllOffers();
+            var allOffers = await managementService.CreateAllMissionsVm();
             return View(allOffers);
+        }
+
+        public async Task<IActionResult>()
+        {
+            return View();
         }
     }
 }
