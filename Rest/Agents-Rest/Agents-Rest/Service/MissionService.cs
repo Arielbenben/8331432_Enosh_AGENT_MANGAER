@@ -42,6 +42,11 @@ namespace Agents_Rest.Service
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
+            var checkMission = await _context.Missions.Where(m => m.AgentId == agent.Id)
+                .FirstOrDefaultAsync(m => m.TargetId == target.Id);
+
+            if (checkMission != null) return;
+
             MissionModel mission = new()
             {
                 AgentId = agent.Id,

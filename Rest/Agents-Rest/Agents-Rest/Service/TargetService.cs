@@ -111,9 +111,12 @@ namespace Agents_Rest.Service
 
         public async Task MoveLocation(int id, MoveLocationDto moveLocationDto)
         {
-            var (x, y) = directions[moveLocationDto.Location];
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
-            var target = await GetTargetByIdAsync(id);
+            var (x, y) = directions[moveLocationDto.direction];
+
+            var target = await _context.Targets.FirstOrDefaultAsync(t => t.Id == id);
+            if (target == null) throw new Exception("The target not exists");
 
             if (CheckLocationInRange(target, (x, y)))
             {
@@ -125,6 +128,8 @@ namespace Agents_Rest.Service
                 throw new Exception($"The location is out of range," +
                     $" current location: {(target.LocationX, target.LocationY)}");
             }
+
+            await _context.SaveChangesAsync();
 
             var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
             return;

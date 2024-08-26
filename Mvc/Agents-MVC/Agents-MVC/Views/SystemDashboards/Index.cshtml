@@ -1,0 +1,66 @@
+﻿@model Agents_MVC.ViewModel.GeneralDashboardVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <h4>GeneralDashboardVM</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SumAgents)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SumAgents)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SumAgentsActive)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SumAgentsActive)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SumTargets)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SumTargets)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SumTargetsKilled)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SumTargetsKilled)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SumMissions)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SumMissions)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SumMissionsAssigned)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SumMissionsAssigned)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CompareAgentsToTargets)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CompareAgentsToTargets)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CompareAgentsDormantsToTargets)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CompareAgentsDormantsToTargets)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Status Agents", "AgentsDetails", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Status Targets", "TargetsDetails", new { /* id = Model.PrimaryKey */ }) 
+</div>

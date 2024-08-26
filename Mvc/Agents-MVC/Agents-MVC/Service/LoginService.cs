@@ -2,6 +2,6 @@
 {
     public class LoginService(IHttpClientFactory clientFactory):ILoginService
     {
-        public 
+        
     }
 }

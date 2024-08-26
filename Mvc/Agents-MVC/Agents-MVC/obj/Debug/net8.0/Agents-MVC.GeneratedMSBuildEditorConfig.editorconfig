@@ -34,8 +34,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/relbh/source/repos/8331432_Enosh_AGENT_MANGAER/Mvc/Agents-MVC/Agents-MVC/Views/MissionsManagement/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWlzc2lvbnNNYW5hZ2VtZW50XEluZGV4LmNzaHRtbA==
+[C:/Users/relbh/source/repos/8331432_Enosh_AGENT_MANGAER/Mvc/Agents-MVC/Agents-MVC/Views/MissionsDetails/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWlzc2lvbnNEZXRhaWxzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/relbh/source/repos/8331432_Enosh_AGENT_MANGAER/Mvc/Agents-MVC/Agents-MVC/Views/Shared/Error.cshtml]
@@ -44,6 +44,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/relbh/source/repos/8331432_Enosh_AGENT_MANGAER/Mvc/Agents-MVC/Agents-MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/relbh/source/repos/8331432_Enosh_AGENT_MANGAER/Mvc/Agents-MVC/Agents-MVC/Views/SystemDashboards/AgentsDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtRGFzaGJvYXJkc1xBZ2VudHNEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/relbh/source/repos/8331432_Enosh_AGENT_MANGAER/Mvc/Agents-MVC/Agents-MVC/Views/SystemDashboards/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtRGFzaGJvYXJkc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/relbh/source/repos/8331432_Enosh_AGENT_MANGAER/Mvc/Agents-MVC/Agents-MVC/Views/SystemDashboards/TargetsDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtRGFzaGJvYXJkc1xUYXJnZXRzRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/relbh/source/repos/8331432_Enosh_AGENT_MANGAER/Mvc/Agents-MVC/Agents-MVC/Views/_ViewImports.cshtml]

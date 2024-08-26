@@ -11,6 +11,8 @@ namespace Agents_MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddHttpClient();
+
             builder.Services.AddScoped<IMissionDetailsService, MissionDetailsService>();
             builder.Services.AddScoped<IMissionsManagementService, MissionsManagementService>();
             builder.Services.AddScoped<ILoginService, LoginService>();

@@ -111,23 +111,27 @@ namespace Agents_Rest.Service
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
-            var (x, y) = directions[moveLocationDto.Location];
+            var (x, y) = directions[moveLocationDto.direction];
 
-            var agent = await GetAgentById(id);
+            var agent = await _context.Agents.FirstOrDefaultAsync(a => a.Id == id);
+            if (agent == null) throw new Exception("The agent not exists");
             // check if agent is valid
             if (agent.Status == StatusAgent.Active) throw new Exception(
-                "The agent is active, It is not possible to change location"); 
+                "The agent is active, It is not possible to change location");
 
-
-            if (CheckLocationInRange(agent, (x, y)))
+            object _lock = new object();
+            lock (_lock)
             {
-                agent.LocationX += x;
-                agent.LocationY += y;
-            }
-            else
-            {
-                throw new Exception($"The location is out of range," +
-                    $" current location: {(agent.LocationX, agent.LocationY)}");
+                if (CheckLocationInRange(agent, (x, y)))
+                {
+                    agent.LocationX += x;
+                    agent.LocationY += y;
+                }
+                else
+                {
+                    throw new Exception($"The location is out of range," +
+                        $" current location: {(agent.LocationX, agent.LocationY)}");
+                }
             }
 
             await _context.SaveChangesAsync();
@@ -150,7 +154,7 @@ namespace Agents_Rest.Service
             int agentX = agent.LocationX.CompareTo(target.LocationX) switch
             {
                 -1 => agent.LocationX + 1,
-                1 => agent.LocationY - 1,
+                1 => agent.LocationX - 1,
                 _ => 0
             };
 

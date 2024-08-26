@@ -1,4 +1,5 @@
 ﻿using Agents_MVC.Models;
+using Agents_MVC.ViewModel;
 using System.Text.Json;
 
 namespace Agents_MVC.Service
@@ -6,7 +7,7 @@ namespace Agents_MVC.Service
     public class SystemDashboardService(IHttpClientFactory clientFactory):ISystemDashboardService
     {
 
-        private readonly string baseUrl = "https://localhost:5102";
+        private readonly string baseUrl = "http://localhost:5102";
 
         public async Task<List<AgentModel>> GetAllAgents()
         {
@@ -117,10 +118,8 @@ namespace Agents_MVC.Service
             return sumMissionsAssigned;
         }
 
-        public async Task<double> CompareAgentToTargets()
+        public double CompareAgentToTargets(int sumAgents, int sumTargets)
         {
-            var sumAgents = await SumAllAgents();
-            var sumTargets = await SumAllTargets();
             return sumAgents/sumTargets;
         }
 
@@ -163,5 +162,70 @@ namespace Agents_MVC.Service
                 .Where(m => m.AgentId == agentId).Count();
             return SumAgentKilled;
         }
+
+        public async Task<GeneralDashboardVM> AddGeneralDashboardVM()
+        {
+            GeneralDashboardVM gDVM = new()
+            {
+                SumAgents = await SumAllAgents(),
+                SumAgentsActive = await SumAllAgentsActive(),
+                SumTargets = await SumAllTargets(),
+                SumTargetsKilled = await SumAllTargetsKilled(),
+                SumMissions = await SumAllMissions(),
+                SumMissionsAssigned = await SumAllMissionsAssigned(),
+                CompareAgentsDormantsToTargets = await CompareAgentsDormatsToTargets()
+            };
+            gDVM.CompareAgentsToTargets = CompareAgentToTargets(gDVM.SumAgents, gDVM.SumTargets);
+            return gDVM;
+        }
+
+        public async Task<List<AgentsDetailsVM>> AddAgentsDetails()
+        {
+            List<AgentsDetailsVM> agentsDetailsList = new();
+
+            var allAgents = await GetAllAgents();
+
+            foreach (var agent in allAgents)
+            {
+                AgentsDetailsVM agentsDetailsVM = new()
+                {
+                    Id = agent.Id,
+                    NickName = agent.NickName,
+                    ImageUrl = agent.Image_url,
+                    LocationX = agent.LocationX,
+                    LocationY = agent.LocationY,
+                    Status = agent.Status,
+                    MissionId = await GetMissionActiveOfAgent(agent.Id),
+                    TimeLeftToKill = await GetTimeLeftToKill(agent.Id),
+                    SumEliminates = await SumAgentKilled(agent.Id)
+                };
+                agentsDetailsList.Add(agentsDetailsVM);
+            }
+            return agentsDetailsList;
+        }
+        
+        public async Task<List<TargetsDetailsVM>> AddTargetsDetails()
+        {
+            var allTargets = await GetAllTargets();
+
+            List<TargetsDetailsVM> targetsDetailsList = new();
+
+            foreach (var target in allTargets)
+            {
+                TargetsDetailsVM targetsDetailsVM = new()
+                {
+                    Id = target.Id,
+                    Name = target.Name,
+                    Position = target.Position,
+                    LocationX = target.LocationX,
+                    LocationY = target.LocationY,
+                    ImageUrl = target.ImageUrl,
+                    Status = target.Status
+                };
+                targetsDetailsList.Add(targetsDetailsVM);
+            }
+            return targetsDetailsList;
+        }
+
     }
 }

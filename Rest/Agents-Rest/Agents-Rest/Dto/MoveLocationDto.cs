@@ -2,6 +2,6 @@
 {
     public class MoveLocationDto
     {
-        public string Location { get; set; }
+        public string direction { get; set; }
     }
 }

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Agents_MVC.ViewModel.AgentsDetailsVM>
+
+@{
+    ViewData["Title"] = "AgentsDetails";
+}
+
+<h1>AgentsDetails</h1>
+
+<p>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NickName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MissionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeLeftToKill)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SumEliminates)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NickName)
+            </td>
+            <td>
+                @Html.Raw($"<img src='{item.ImageUrl}' alt='Image' />")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MissionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeLeftToKill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SumEliminates)
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

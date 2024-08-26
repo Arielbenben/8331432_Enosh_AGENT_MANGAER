@@ -6,7 +6,7 @@ namespace Agents_MVC.Service
     public class MissionDetailsService(IHttpClientFactory clientFactory) : IMissionDetailsService
     {
 
-        private readonly string baseUrl = "https://localhost:5102";
+        private readonly string baseUrl = "http://localhost:5102";
 
         public async Task<MissionModel> GetMissionById(int id)
         {

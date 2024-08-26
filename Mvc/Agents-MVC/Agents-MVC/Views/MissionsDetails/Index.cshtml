@@ -1,0 +1,31 @@
+﻿@model List<Agents_MVC.Models.MissionModel>
+
+<h2>Agent Missions</h2>
+
+@foreach (var item in Model)
+{
+    <h3>@item.Agent.Id</h3> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mission ID</th>
+                <th>Target</th>
+                <th>Time Left</th>
+                <th>Execution Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        @* <tbody>
+            @foreach (var mission in item)
+            {
+                <tr>
+                    <td>@mission.Id</td>
+                    <td>@mission.Target.Name</td> 
+                    <td>@mission.TimeLeft</td>
+                    <td>@mission.ExecutionTime</td>
+                    <td>@mission.Status</td>
+                </tr>
+            }
+        </tbody> *@
+    </table>
+}
