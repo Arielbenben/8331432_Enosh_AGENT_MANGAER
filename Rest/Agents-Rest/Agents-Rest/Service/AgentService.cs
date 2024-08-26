@@ -52,7 +52,7 @@ namespace Agents_Rest.Service
             AgentModel newAgent = new()
             {
                 NickName = agentDto.nickName,
-                Image_url = agentDto.PhotoUrl,
+                ImageUrl = agentDto.PhotoUrl,
             };
 
             await _context.Agents.AddAsync(newAgent);
@@ -81,7 +81,7 @@ namespace Agents_Rest.Service
             var agent = await GetAgentById(id);
 
             agent.NickName = agentDto.nickName;
-            agent.Image_url = agentDto.PhotoUrl;
+            agent.ImageUrl = agentDto.PhotoUrl;
 
             await _context.SaveChangesAsync();
 

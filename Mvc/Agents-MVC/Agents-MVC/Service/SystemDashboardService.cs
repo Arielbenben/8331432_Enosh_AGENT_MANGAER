@@ -191,7 +191,7 @@ namespace Agents_MVC.Service
                 {
                     Id = agent.Id,
                     NickName = agent.NickName,
-                    ImageUrl = agent.Image_url,
+                    ImageUrl = agent.ImageUrl,
                     LocationX = agent.LocationX,
                     LocationY = agent.LocationY,
                     Status = agent.Status,

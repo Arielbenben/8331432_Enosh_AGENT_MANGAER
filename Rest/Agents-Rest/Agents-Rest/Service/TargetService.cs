@@ -31,7 +31,7 @@ namespace Agents_Rest.Service
             {
                 Name = targetDto.name,
                 Position = targetDto.position,
-                Image_url = targetDto.PhotoUrl
+                ImageUrl = targetDto.PhotoUrl
             };
 
             await _context.Targets.AddAsync(newTarget);
@@ -83,7 +83,7 @@ namespace Agents_Rest.Service
 
             target.Name = targetDto.name;
             target.Position = targetDto.position;
-            target.Image_url = targetDto.PhotoUrl;
+            target.ImageUrl = targetDto.PhotoUrl;
 
             await _context.SaveChangesAsync();
 

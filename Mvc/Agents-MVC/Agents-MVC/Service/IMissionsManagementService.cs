@@ -6,5 +6,6 @@ namespace Agents_MVC.Service
     public interface IMissionsManagementService
     {
         Task<List<MissionManagementVM>> CreateAllMissionsVm();
+        Task InstructMission(int id);
     }
 }

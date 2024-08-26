@@ -57,5 +57,21 @@ namespace Agents_MVC.Service
             return mmvm;
         }
 
+        public async Task InstructMission(int id)
+        {
+            var httpClient = clientFactory.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Put, $"{baseUrl}/missions/{id}");
+
+            //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.Token); // check the tokken
+
+            var response = await httpClient.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+            }
+            return;
+        }
     }
 }

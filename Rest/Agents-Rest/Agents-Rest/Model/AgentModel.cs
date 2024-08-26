@@ -14,7 +14,7 @@ namespace Agents_Rest.Model
 
         [Required] 
         public string NickName {  get; set; }
-        public string Image_url {  get; set; }
+        public string ImageUrl {  get; set; }
         public int LocationX { get; set; } = 0;
         public int LocationY { get; set; } = 0;
         public StatusAgent Status { get; set; } = StatusAgent.Dormant;

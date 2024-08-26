@@ -20,7 +20,7 @@ namespace Agents_Rest.Model
         public string Position { get; set; }
         public int LocationX { get; set; } = 0;
         public int LocationY { get; set; } = 0;
-        public string Image_url { get; set; }
+        public string ImageUrl { get; set; }
         public StatusTarget Status { get; set; } = StatusTarget.Living;
 
     }

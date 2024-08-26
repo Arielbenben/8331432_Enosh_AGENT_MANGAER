@@ -80,16 +80,19 @@ namespace Agents_Rest.Service
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
-            var mission = await _context.Missions.FirstOrDefaultAsync(m => m.Id == id);
+            var mission = await _context.Missions.Include(m => m.Agent)
+                .Include(m => m.Target).FirstOrDefaultAsync(m => m.Id == id);
             if (mission == null) throw new Exception("The mission not exists");
 
             mission.Status = StatusMission.Assigned;
             mission.Agent.Status = StatusAgent.Active;
             mission.Target.Status = StatusTarget.Assigned;
+            await CalculateTimeLeft(mission);
 
             _context.Missions.RemoveRange(await _context.Missions
                 .Where(m => m.Target == mission.Target)
-                .Where(m => m.Status == StatusMission.Offer).ToListAsync());
+                .Where(m => m.Status == StatusMission.Offer)
+                .Where(m => m.AgentId != mission.AgentId).ToListAsync());
 
             var potencialMisiions = await agentService.RefreshAllAgentsPosibilityMissions();
 

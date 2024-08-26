@@ -1,4 +1,5 @@
 ﻿using Agents_MVC.Service;
+using Agents_MVC.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agents_MVC.Controllers
@@ -12,8 +13,9 @@ namespace Agents_MVC.Controllers
             return View(allOffers);
         }
 
-        public async Task<IActionResult>()
+        public async Task<IActionResult> Instruct(int id)
         {
+            await managementService.InstructMission(id);
             return View();
         }
     }

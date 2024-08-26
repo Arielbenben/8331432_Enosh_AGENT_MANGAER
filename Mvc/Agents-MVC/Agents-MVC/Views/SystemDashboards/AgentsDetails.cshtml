@@ -72,7 +72,10 @@
                 @Html.DisplayFor(modelItem => item.SumEliminates)
             </td>
             <td>
-                
+                @if(item.MissionId > 0)
+                {
+                    @Html.ActionLink("Mission Details", "Index", "MissionsDetails", new { Id = item.MissionId })
+                }
             </td>
         </tr>
 }
