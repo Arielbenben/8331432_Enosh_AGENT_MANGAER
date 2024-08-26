@@ -14,6 +14,7 @@ namespace Agents_Rest.Service
         Task<List<MissionModel>> RefreshAllMissiomMap();
         Task<Dictionary<int, List<MissionModel>>> GetAllMissionsOffersToAgents();
         Task<MissionModel> GetMissionById(int id);
+        Task CheckIfCompleteMission(MissionModel MissionsAssigned);
 
     }
 }

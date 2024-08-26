@@ -63,11 +63,14 @@ namespace Agents_Rest.Service
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
+            var missionDB = await _context.Missions.FirstOrDefaultAsync(m => m.Id == mission.Id);
+            if (missionDB == null) throw new Exception("The mission is not exists");
+
             double distance = CalculateDistance(mission.Agent, mission.Target);
-            mission.TimeLeft = distance;
+            missionDB.TimeLeft = distance;
 
             await _context.SaveChangesAsync();
-            return ;
+            return;
         }
 
         public async Task UpdateMissionAgentLocation(MissionModel mission)
@@ -83,6 +86,12 @@ namespace Agents_Rest.Service
             var mission = await _context.Missions.Include(m => m.Agent)
                 .Include(m => m.Target).FirstOrDefaultAsync(m => m.Id == id);
             if (mission == null) throw new Exception("The mission not exists");
+
+            if (await _context.Agents.AnyAsync(a => a.Id == mission.AgentId && a.Status == StatusAgent.Active))
+                throw new Exception("The agent is active");
+
+            if(await _context.Targets.AnyAsync(t => t.Id == mission.TargetId && t.Status == StatusTarget.Assigned))
+                throw new Exception("The target is active");
 
             mission.Status = StatusMission.Assigned;
             mission.Agent.Status = StatusAgent.Active;
@@ -115,17 +124,24 @@ namespace Agents_Rest.Service
             return;
         }
 
-        public async Task CheckIfCompleteMission(List<MissionModel> MissionsAssigned)
+        public async Task CheckIfCompleteMission(MissionModel mission)
         {
-            foreach (var mission in MissionsAssigned)
+            var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var missionDB = await _context.Missions.Include(m => m.Agent)
+                .Include(m => m.Target).FirstOrDefaultAsync(m => m.Id == mission.Id);
+            if (missionDB == null) throw new Exception("The mission is not exists");
+
+            if (missionDB.Target.LocationX == mission.Agent.LocationX &&
+                missionDB.Target.LocationY == mission.Agent.LocationY)
             {
-                if(mission.Target.LocationX == mission.Agent.LocationX && 
-                    mission.Target.LocationY == mission.Agent.LocationY)
-                {
-                    mission.Agent.Status = StatusAgent.Dormant;
-                    mission.Status = StatusMission.Eliminated;
-                    await RefreshAllMissiomMap();
-                }  
+                missionDB.Agent.Status = StatusAgent.Dormant;
+                missionDB.Status = StatusMission.Eliminated;
+                missionDB.ExecutionTime = DateTime.Now;
+                missionDB.Target.Status = StatusTarget.Killed;
+
+                await RefreshAllMissiomMap();
+                await _context.SaveChangesAsync();
             }
             return;
         }

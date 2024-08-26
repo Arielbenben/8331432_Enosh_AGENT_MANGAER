@@ -150,24 +150,28 @@ namespace Agents_Rest.Service
         public async Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target) // check 
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
+
+            var agentDB = await _context.Agents.FirstOrDefaultAsync(a => a.Id == agent.Id);
+            if (agentDB == null) throw new Exception("The agent is not exists");
             
-            int agentX = agent.LocationX.CompareTo(target.LocationX) switch
+            int agentX = agentDB.LocationX.CompareTo(target.LocationX) switch
             {
-                -1 => agent.LocationX + 1,
-                1 => agent.LocationX - 1,
-                _ => 0
+                -1 => agentDB.LocationX + 1,
+                1 => agentDB.LocationX - 1,
+                _ => agentDB.LocationX + 0
             };
 
-            int agentY = agent.LocationY.CompareTo(target.LocationY) switch
+            int agentY = agentDB.LocationY.CompareTo(target.LocationY) switch
             {
-                -1 => agent.LocationY + 1,
-                1 => agent.LocationY - 1,
-                _ => 0
+                -1 => agentDB.LocationY + 1,
+                1 => agentDB.LocationY - 1,
+                _ => agentDB.LocationY + 0
             }; 
 
-            agent.LocationX = agentX;
-            agent.LocationY = agentY;   
-           
+            agentDB.LocationX = agentX;
+            agentDB.LocationY = agentY;
+
+            
             await _context.SaveChangesAsync();
             return;
         }
@@ -217,7 +221,12 @@ namespace Agents_Rest.Service
 
             if (missionAssigned.Count > 0)
             {
-                missions.ForEach(async m => await UpdateAgentLocationKillMission(m.Agent, m.Target));
+                foreach (var mission in missionAssigned)
+                {
+                    await UpdateAgentLocationKillMission(mission.Agent, mission.Target);
+                    await missionService.CheckIfCompleteMission(mission);
+                    await missionService.CalculateTimeLeft(mission);
+                }
             }
             await missionService.RefreshAllMissiomMap();
         }
