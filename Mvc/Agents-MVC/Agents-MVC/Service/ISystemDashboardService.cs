@@ -1,4 +1,5 @@
-﻿using Agents_MVC.ViewModel;
+﻿using Agents_MVC.Models;
+using Agents_MVC.ViewModel;
 
 namespace Agents_MVC.Service
 {
@@ -7,5 +8,8 @@ namespace Agents_MVC.Service
         Task<GeneralDashboardVM> AddGeneralDashboardVM();
         Task<List<AgentsDetailsVM>> AddAgentsDetails();
         Task<List<TargetsDetailsVM>> AddTargetsDetails();
+        Task<List<AgentModel>> GetAllAgents();
+        Task<List<TargetModel>> GetAllTargets();
+        Task<List<MissionModel>> GetAllMissions();
     }
 }

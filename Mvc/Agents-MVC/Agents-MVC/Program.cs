@@ -1,3 +1,4 @@
+using AgentClient.Service;
 using Agents_MVC.Service;
 
 namespace Agents_MVC
@@ -17,6 +18,7 @@ namespace Agents_MVC
             builder.Services.AddScoped<IMissionsManagementService, MissionsManagementService>();
             builder.Services.AddScoped<ILoginService, LoginService>();
             builder.Services.AddScoped<ISystemDashboardService, SystemDashboardService>();
+            builder.Services.AddScoped<IMatrixService, MatrixService>();
 
             var app = builder.Build();
 

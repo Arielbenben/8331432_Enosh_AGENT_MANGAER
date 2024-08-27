@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\rest\\agents-rest\\agents-rest\\controllers\\agentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|solutionrelative:agents-rest\\controllers\\agentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\rest\\agents-rest\\agents-rest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|solutionrelative:agents-rest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\rest\\agents-rest\\agents-rest\\service\\iagentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|solutionrelative:agents-rest\\service\\iagentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\rest\\agents-rest\\agents-rest\\controllers\\agentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|solutionrelative:agents-rest\\controllers\\agentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E5585256-9C77-4FC1-BB36-A18BE23E8DF0}|Agents-Rest\\Agents-Rest.csproj|c:\\users\\relbh\\source\\repos\\8331432_enosh_agent_mangaer\\rest\\agents-rest\\agents-rest\\data\\dbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -134,7 +134,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 21,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
@@ -174,7 +174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MissionService.cs",
               "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\Agents-Rest\\Service\\MissionService.cs",
               "RelativeDocumentMoniker": "Agents-Rest\\Service\\MissionService.cs",
@@ -247,20 +247,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "AgentsController.cs",
               "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\Agents-Rest\\Controllers\\AgentsController.cs",
               "RelativeDocumentMoniker": "Agents-Rest\\Controllers\\AgentsController.cs",
               "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\Agents-Rest\\Controllers\\AgentsController.cs",
               "RelativeToolTip": "Agents-Rest\\Controllers\\AgentsController.cs",
-              "ViewState": "AQIAAGYAAAAAAAAAAAAmwCYAAAARAAAA",
+              "ViewState": "AQIAADAAAAAAAAAAAAAowDoAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-21T10:14:51.773Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AgentService.cs",
               "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\Agents-Rest\\Service\\AgentService.cs",
               "RelativeDocumentMoniker": "Agents-Rest\\Service\\AgentService.cs",
@@ -286,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "TargetService.cs",
               "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\Agents-Rest\\Service\\TargetService.cs",
               "RelativeDocumentMoniker": "Agents-Rest\\Service\\TargetService.cs",
@@ -299,7 +299,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "IAgentService.cs",
               "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\Agents-Rest\\Service\\IAgentService.cs",
               "RelativeDocumentMoniker": "Agents-Rest\\Service\\IAgentService.cs",
@@ -402,13 +402,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\Agents-Rest\\Program.cs",
               "RelativeDocumentMoniker": "Agents-Rest\\Program.cs",
               "ToolTip": "C:\\Users\\relbh\\source\\repos\\8331432_Enosh_AGENT_MANGAER\\Rest\\Agents-Rest\\Agents-Rest\\Program.cs",
               "RelativeToolTip": "Agents-Rest\\Program.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAowEAAAAAMAAAA",
+              "ViewState": "AQIAADcAAAAAAAAAAAAgwBEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-21T11:34:04.775Z",
               "EditorCaption": ""
