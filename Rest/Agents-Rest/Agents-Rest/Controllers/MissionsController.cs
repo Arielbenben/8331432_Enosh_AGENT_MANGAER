@@ -74,20 +74,5 @@ namespace Agents_Rest.Controllers
                 return BadRequest("Put request was wrong");
             }
         }
-
-        [HttpGet("getOffers")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<MissionModel>> GetAllMissionsOfferToAgents()
-        {
-            try
-            {
-                return Ok(await missionService.GetAllMissionsOffersToAgents());
-            }
-            catch
-            {
-                return BadRequest("Get request was wrong");
-            }
-        }
     }
 }

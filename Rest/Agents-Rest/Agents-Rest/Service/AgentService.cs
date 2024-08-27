@@ -12,6 +12,7 @@ namespace Agents_Rest.Service
         private IMissionService missionService => serviceProvider.GetRequiredService<IMissionService>();
         private ITargetService targetService => serviceProvider.GetRequiredService<ITargetService>();
 
+        // dictionary for the locations, make is easy to get location
         private readonly Dictionary<string, (int x, int y)> directions = new()
         {
             {"n", (x: 0,y: 1) },
@@ -23,6 +24,7 @@ namespace Agents_Rest.Service
             {"sw", (x: -1,y: -1) },
             {"se", (x: 1,y: -1) }
         };
+
 
         public async Task<AgentModel> GetAgentById(int id)
         {
@@ -85,7 +87,8 @@ namespace Agents_Rest.Service
 
             await _context.SaveChangesAsync();
 
-            var potencialMissions = await CheckPosibilityMissionToAgent(agent); // need to send back
+            // check if there are missions can be instruct to agent
+            await CheckPosibilityMissionToAgent(agent);
 
             return;
         }
@@ -102,7 +105,8 @@ namespace Agents_Rest.Service
 
             await _context.SaveChangesAsync();
 
-            var potencialMissions = await CheckPosibilityMissionToAgent(agent); // need to check where it go
+            // check if there are missions can be instruct to agent
+            await CheckPosibilityMissionToAgent(agent); 
 
             return;
         }
@@ -111,6 +115,7 @@ namespace Agents_Rest.Service
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
+            //take the numbers of locations from the dictionary 
             var (x, y) = directions[moveLocationDto.direction];
 
             var agent = await _context.Agents.FirstOrDefaultAsync(a => a.Id == id);
@@ -136,7 +141,8 @@ namespace Agents_Rest.Service
 
             await _context.SaveChangesAsync();
 
-            var potencialMissions = await CheckPosibilityMissionToAgent(agent); // need to check where it go
+            // check if there are missions can be instruct to agent
+            await CheckPosibilityMissionToAgent(agent);
 
             return;
         }
@@ -147,6 +153,7 @@ namespace Agents_Rest.Service
                 && agent.LocationY + location.y >= 0 && agent.LocationY + location.y <= 1000;
         }
 
+        // when agent instructed to mission, the function move the agent one step to kill the target
         public async Task UpdateAgentLocationKillMission(AgentModel agent, TargetModel target) // check 
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
@@ -176,6 +183,7 @@ namespace Agents_Rest.Service
             return;
         }
 
+        // check if there are missions can be instruct to agent
         public async Task<List<MissionModel>> CheckPosibilityMissionToAgent(AgentModel agent)
         {
             try
@@ -187,8 +195,10 @@ namespace Agents_Rest.Service
 
                 var potentialTargets = livingTargets.Where(t => CalculateDistance(agent, t) <= 200).ToList();
 
+                //create missoins offers
                 potentialTargets.ForEach(async p => await missionService.CreateMission(agent, p));
 
+                //get the missions offers of the agent
                 var potencialMission = await _context.Missions.Where(m => m.Agent == agent)
                     .Where(m => m.Status == StatusMission.Offer)
                     .Include(m => m.Agent).Include(m => m.Target).ToListAsync();
@@ -201,19 +211,19 @@ namespace Agents_Rest.Service
             }
         }
 
-        public async Task<Dictionary<int, List<MissionModel>>> RefreshAllAgentsPosibilityMissions()
+        // refresh all the agent's offers
+        public async Task RefreshAllAgentsPosibilityMissions()
         {
-            Dictionary<int, List<MissionModel>> agentsMissions = new();
-
             var agents = await GetAllAgentsAsync();
             foreach (var agent in agents)
             {
-                agentsMissions[agent.Id] = await CheckPosibilityMissionToAgent(agent);
+                await CheckPosibilityMissionToAgent(agent);
             }
 
-            return agentsMissions;
+            return;
         }
 
+        // move one step all the agents against the targets, check if complete mission and update the time left
         public async Task UpdateAllAgentsKillMission()
         {
             var missions = await missionService.GetAllMissionsAsync();

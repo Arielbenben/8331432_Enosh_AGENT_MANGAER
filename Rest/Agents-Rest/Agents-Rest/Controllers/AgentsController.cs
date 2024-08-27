@@ -30,7 +30,7 @@ namespace Agents_Rest.Controllers
         [HttpGet("get/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<AgentModel>> GetByNickName(int id)
+        public async Task<ActionResult<AgentModel>> GetById(int id)
         {
             try
             {

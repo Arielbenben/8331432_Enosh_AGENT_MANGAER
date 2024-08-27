@@ -10,7 +10,7 @@ namespace Agents_MVC.Service
     {
         private readonly string baseUrl = "http://localhost:5102";
 
-        public async Task<List<MissionModel>> GetAllOffers()
+        public async Task<List<MissionModel>> GetAllMissions()
         {
             var httpClient = clientFactory.CreateClient();
 
@@ -35,7 +35,7 @@ namespace Agents_MVC.Service
 
         public async Task<List<MissionManagementVM>> CreateAllMissionsVm()
         {
-            var allMissions = await GetAllOffers();
+            var allMissions = await GetAllMissions();
             List<MissionManagementVM> mmvm = [];
             foreach (var mission in allMissions)
             {

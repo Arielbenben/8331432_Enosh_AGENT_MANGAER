@@ -10,7 +10,7 @@ namespace Agents_Rest.Service
     {
         private IMissionService missionService => serviceProvider.GetRequiredService<IMissionService>();
 
-
+        // dictionary for the locations, make is easy to get location
         private readonly Dictionary<string, (int x, int y)> directions = new()
         {
             {"n", (x: 0,y: 1) },
@@ -87,7 +87,8 @@ namespace Agents_Rest.Service
 
             await _context.SaveChangesAsync();
 
-            var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
+            // check if there are missions can be instruct to target
+            await CheckPosibilityMissionToTarget(target);  
 
             return;
         }
@@ -104,7 +105,8 @@ namespace Agents_Rest.Service
 
             await _context.SaveChangesAsync();
 
-            var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
+            // check if there are missions can be instruct to target
+            await CheckPosibilityMissionToTarget(target);  
 
             return;
         }
@@ -113,6 +115,7 @@ namespace Agents_Rest.Service
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
+            //take the numbers of locations from the dictionary 
             var (x, y) = directions[moveLocationDto.direction];
 
             var target = await _context.Targets.FirstOrDefaultAsync(t => t.Id == id);
@@ -131,7 +134,8 @@ namespace Agents_Rest.Service
 
             await _context.SaveChangesAsync();
 
-            var potencialMissions = await CheckPosibilityMissionToTarget(target);  // need to send back
+            // check if there are missions can be instruct to target
+            await CheckPosibilityMissionToTarget(target); 
             return;
         }
 
@@ -141,7 +145,8 @@ namespace Agents_Rest.Service
                 && target.LocationY + location.y >= 0 && target.LocationY + location.y <= 1000;
         }
 
-        public async Task<bool> TargetIsvalid(TargetModel target) // check
+        // check if the target already assigned
+        public async Task<bool> TargetIsvalid(TargetModel target) 
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
@@ -149,15 +154,19 @@ namespace Agents_Rest.Service
                 .AnyAsync(m => m.Status == StatusMission.Assigned);
         }
 
+        // where target created, checks if there are missions can be assigned to this target
         public async Task<List<MissionModel>> CheckPosibilityMissionToTarget(TargetModel target)
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
 
             var dormantAgents = await _context.Agents.Where(a => a.Status == StatusAgent.Dormant).ToListAsync();
+            // check if agent in the rulse to mission offer
             var potentialAgents = dormantAgents.Where(a => CalculateDistance(a, target) <= 200).ToList();
 
+            // create missions offers for the potential agents 
             potentialAgents.ForEach(async p => await missionService.CreateMission(p, target));
 
+            //get all the missions offers
             var potencialMission = await _context.Missions.Where(m => m.Target == target)
                 .Where(m => m.Status == StatusMission.Offer)
                 .Include(m => m.Target).Include(m => m.Agent).ToListAsync();

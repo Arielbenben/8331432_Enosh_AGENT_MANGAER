@@ -145,7 +145,7 @@ namespace Agents_MVC.Service
             return missionAgent.Id;
         }
         
-        public async Task<double> GetTimeLeftToKill(int AgentId)
+        public async Task<double> GetTimeLeftToKillOfAgent(int AgentId)
         {
             var missions = await GetAllMissions();
             var missionAgent = missions.Where(m => m.Status == StatusMission.Assigned)
@@ -155,6 +155,7 @@ namespace Agents_MVC.Service
             return missionAgent.TimeLeft;
         }
 
+        // check how many targets the agent killed
         public async Task<int> SumAgentKilled(int agentId)
         {
             var missions = await GetAllMissions();
@@ -196,7 +197,7 @@ namespace Agents_MVC.Service
                     LocationY = agent.LocationY,
                     Status = agent.Status,
                     MissionId = await GetMissionActiveOfAgent(agent.Id),
-                    TimeLeftToKill = await GetTimeLeftToKill(agent.Id),
+                    TimeLeftToKill = await GetTimeLeftToKillOfAgent(agent.Id),
                     SumEliminates = await SumAgentKilled(agent.Id)
                 };
                 agentsDetailsList.Add(agentsDetailsVM);

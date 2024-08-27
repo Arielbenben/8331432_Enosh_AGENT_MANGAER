@@ -32,12 +32,6 @@ namespace Agents_Rest.Service
             return mission;
         }
 
-        public async Task<Dictionary<int, List<MissionModel>>> GetAllMissionsOffersToAgents()
-        {
-            var AllOffersToAgents = await agentService.RefreshAllAgentsPosibilityMissions();
-            return AllOffersToAgents;
-        }
-
         public async Task CreateMission(AgentModel agent, TargetModel target)
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
@@ -59,6 +53,7 @@ namespace Agents_Rest.Service
             return;
         }
 
+        //check how much time left and save this to DB
         public async Task CalculateTimeLeft(MissionModel mission)
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
@@ -73,12 +68,14 @@ namespace Agents_Rest.Service
             return;
         }
 
+        // move one step all the agents against the target
         public async Task UpdateMissionAgentLocation(MissionModel mission)
         {
             await agentService.UpdateAgentLocationKillMission(mission.Agent, mission.Target);
             return;
         }
 
+        // get a mission and change the status to assigned
         public async Task UpdateMissionAssigned(int id)
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
@@ -87,33 +84,41 @@ namespace Agents_Rest.Service
                 .Include(m => m.Target).FirstOrDefaultAsync(m => m.Id == id);
             if (mission == null) throw new Exception("The mission not exists");
 
+            // check if the agent already active
             if (await _context.Agents.AnyAsync(a => a.Id == mission.AgentId && a.Status == StatusAgent.Active))
                 throw new Exception("The agent is active");
 
-            if(await _context.Targets.AnyAsync(t => t.Id == mission.TargetId && t.Status == StatusTarget.Assigned))
+            // check if the target already assigned
+            if (await _context.Targets.AnyAsync(t => t.Id == mission.TargetId && t.Status == StatusTarget.Assigned))
                 throw new Exception("The target is active");
 
             mission.Status = StatusMission.Assigned;
+            //update agent status
             mission.Agent.Status = StatusAgent.Active;
+            //update target status
             mission.Target.Status = StatusTarget.Assigned;
+            //update time left
             await CalculateTimeLeft(mission);
 
+            // remove all the offers of the same mission
             _context.Missions.RemoveRange(await _context.Missions
                 .Where(m => m.Target == mission.Target)
                 .Where(m => m.Status == StatusMission.Offer)
                 .Where(m => m.AgentId != mission.AgentId).ToListAsync());
 
-            var potencialMisiions = await agentService.RefreshAllAgentsPosibilityMissions();
+            await agentService.RefreshAllAgentsPosibilityMissions();
 
             await _context.SaveChangesAsync();
             return;
         }
 
+        // update all agents move one step against the targets
         public async Task UpdateMissiomMoveAgentsActive()
         {
             await agentService.UpdateAllAgentsKillMission();
             return;
         }
+
 
         public async Task UpdateAllMissionsTimeLeft()
         {
@@ -146,6 +151,7 @@ namespace Agents_Rest.Service
             return;
         }
 
+        // refresh all missions offers
         public async Task<List<MissionModel>> RefreshAllMissiomMap()
         {
             var _context = DbContextFactory.CreateDbContext(serviceProvider);
